@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Background
   layers:
   - Default
   - TransparentFX
@@ -42,12 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Characters
-    uniqueID: 1266745077
+  - name: Background
+    uniqueID: 312304819
     locked: 0
   - name: Floors
     uniqueID: 420293071
     locked: 0
-  - name: Background
-    uniqueID: 312304819
+  - name: Characters
+    uniqueID: 1266745077
     locked: 0
