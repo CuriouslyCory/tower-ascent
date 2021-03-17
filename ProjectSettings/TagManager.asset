@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Background
+  - TowerFloor
+  - Tower Lights
   layers:
   - Default
   - TransparentFX
@@ -49,6 +51,12 @@ TagManager:
   - name: Floors
     uniqueID: 420293071
     locked: 0
+  - name: Middle
+    uniqueID: 97350607
+    locked: 0
   - name: Characters
     uniqueID: 1266745077
+    locked: 0
+  - name: Foreground
+    uniqueID: 1935335487
     locked: 0
