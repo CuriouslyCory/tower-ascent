@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 75ca426529eb98e4aaa6c63d8859bfd1
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Bungee Inline
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: cd7ce4c9c7a6d504ba8a2e5c62c97f7b, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
