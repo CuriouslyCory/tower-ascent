@@ -25,14 +25,15 @@ public class HealthSystem
     public void Damage(int dmgAmt)
     {
         health -= dmgAmt;
-        if(health < 0){
+        if(health < 0)
             health = 0;
-        }
     }
 
     public void Heal(int healAmt)
     {
         health += healAmt;
+        if(health > maxHealth)
+            health = maxHealth;
     }
 
 }

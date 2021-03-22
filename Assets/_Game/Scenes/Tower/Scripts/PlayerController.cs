@@ -15,6 +15,9 @@ public class PlayerController : MonoBehaviour
     private GameState gameState;
 
     public PlayerCharacter playerCharacter;
+    
+    [SerializeField]
+    public Camera mainCam;
 
     private enum ControllerStates {
         Idle,
@@ -30,7 +33,6 @@ public class PlayerController : MonoBehaviour
         animator = gameObject.transform.Find("Sprite").GetComponent<Animator>();
         controllerState = ControllerStates.Idle;
     }
-
 
     void OnMouseDown() 
     {
@@ -57,11 +59,24 @@ public class PlayerController : MonoBehaviour
             NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.GetChild(3).GetComponent<NonPlayerCharacter>();
             BattleSystem battleSystem = BattleSystem.Create(playerCharacter, enemy);
             battleSystem.Start();
-        }else{
+            mainCam.transform.position = new Vector3(mainCam.transform.position.x, playerCharacter.transform.position.y, mainCam.transform.position.z);
+            battleSystem.OnStateChanged += BattleSystem_OnStateChanged;
+        }else if(playerCharacter.currentFloor == null && controllerState == ControllerStates.Dragging) {
             transform.position = dragOrigin;
             controllerState = ControllerStates.Idle;
         }
 
+    }
+
+    private void BattleSystem_OnStateChanged(object sender, BattleStateEventArgs e)
+    {
+        switch(e.value){
+            case BattleSystem.BattleStates.Complete:
+                controllerState = ControllerStates.Idle;
+                break;
+            default:
+                break;
+        }
     }
 
     // Update is called once per frame

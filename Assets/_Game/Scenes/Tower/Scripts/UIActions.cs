@@ -75,7 +75,7 @@ public class UIActions : MonoBehaviour
     {
         bool usedItem = gameState.inventory.ConsumeItem(Item.ItemType.HealthPotion);
         if(usedItem){
-            gameState.playerHealth += 10;
+            playerCharacter.healthSystem.Heal(10);
         }
     }
 

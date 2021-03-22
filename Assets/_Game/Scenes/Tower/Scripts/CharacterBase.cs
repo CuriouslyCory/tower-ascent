@@ -68,7 +68,7 @@ public class CharacterBase: MonoBehaviour
     {
         int dmg = 0;
         for(int i = 0; i < dmgPotential[0]; i++){
-            dmg += UnityEngine.Random.Range(0, dmgPotential[1]);
+            dmg += UnityEngine.Random.Range(1, dmgPotential[1]);
         }
         return dmg;
     }

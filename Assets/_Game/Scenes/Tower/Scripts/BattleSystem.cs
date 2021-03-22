@@ -25,7 +25,7 @@ public class BattleSystem
 
     private NonPlayerCharacter towerGuard;
 
-    private enum BattleStates {
+    public enum BattleStates {
         PlayerTurn,
         PlayerAttack,
         EnemyTurn,
@@ -35,7 +35,20 @@ public class BattleSystem
         Complete
     }
 
-    private BattleStates battleState;
+    public event EventHandler<BattleStateEventArgs> OnStateChanged;
+    private BattleStates _battleState;
+
+    private BattleStates battleState
+    {
+        get { return _battleState; }
+        set {
+            if(value == _battleState)
+                return;
+            _battleState = value;
+            OnStateChanged?.Invoke(this, new BattleStateEventArgs { value = _battleState});
+        }
+    }
+    
     private bool isDestroyed;
     private GameObject gameObject;
 
@@ -51,7 +64,6 @@ public class BattleSystem
     {
         Debug.Log("Battle Start!");
         battleState = BattleStates.PlayerTurn;
-        
     }
 
     public void Update(){
