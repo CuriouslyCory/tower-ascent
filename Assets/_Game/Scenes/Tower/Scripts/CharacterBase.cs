@@ -51,7 +51,7 @@ public class CharacterBase: MonoBehaviour
         DoAttackAnimation();
         int dmg = CalcDamage();
         onAttackAnimationComplete = OnComplete;
-        float atkDuration = 2;
+        float atkDuration = 1.5f;
         FunctionTimer.Create(atkDuration, OnComplete);
         
         return dmg;

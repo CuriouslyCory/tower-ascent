@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &38725429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1724590382380387855, guid: aa3aba24e3ec8c747b99fc26e289dd3c, type: 3}
+  m_PrefabInstance: {fileID: 8064747915805126731}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be81ae04666238b4fab79fc9e1e39243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &57334084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8064747915286201179, guid: aa3aba24e3ec8c747b99fc26e289dd3c, type: 3}
@@ -4205,7 +4216,7 @@ MonoBehaviour:
   goldText: {fileID: 917976273}
   potionsText: {fileID: 183766783}
   usePotButton: {fileID: 153051987}
-  playerCharacter: {fileID: 0}
+  playerCharacter: {fileID: 38725429}
 --- !u!4 &1720955891
 Transform:
   m_ObjectHideFlags: 0
@@ -4331,6 +4342,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1148320341}
     m_Modifications:
+    - target: {fileID: 1724590382380387855, guid: aa3aba24e3ec8c747b99fc26e289dd3c, type: 3}
+      propertyPath: dmgPotential.Array.data[1]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 2391381424728174610, guid: aa3aba24e3ec8c747b99fc26e289dd3c, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -4399,6 +4414,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8064747915286201183, guid: aa3aba24e3ec8c747b99fc26e289dd3c, type: 3}
+      propertyPath: mainCam
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 8064747915434086845, guid: aa3aba24e3ec8c747b99fc26e289dd3c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

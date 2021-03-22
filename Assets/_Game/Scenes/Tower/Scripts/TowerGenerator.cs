@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,27 +16,27 @@ public class TowerGenerator : MonoBehaviour
     private void GenerateFloor(int floor){
         Vector3 position = new Vector3(-10,-2 + (floor * 4));
         GameObject newFloor = Instantiate(towerRoom_1, position, Quaternion.identity, grid);
-        SpawnEnemy(NonPlayerCharacter.EnemyType.Enemy1, new Vector3(newFloor.transform.position.x + 4, newFloor.transform.position.y), newFloor.transform);
+        SpawnEnemy(NonPlayerCharacter.EnemyType.Enemy1, floor, new Vector3(newFloor.transform.position.x + 4, newFloor.transform.position.y), newFloor.transform);
         floors.Add(newFloor);
     }
 
-    private void SpawnEnemy(NonPlayerCharacter.EnemyType enemyType, Vector3 location, Transform parent)
+    private void SpawnEnemy(NonPlayerCharacter.EnemyType enemyType, int floor, Vector3 location, Transform parent)
     {
         Transform enemyObject = Instantiate(EnemyAssets.Instance.pfNonPlayerCharacter, location, Quaternion.identity, parent);
         Debug.Log(enemyObject);
         NonPlayerCharacter enemy = enemyObject.GetComponent<NonPlayerCharacter>();
         Debug.Log(enemy);
-        enemy.SetEnemyType(enemyType, 1);
+        // every 5 floors increase the level of the mobs
+        int enemyLevel = (int)Math.Ceiling(floor /  5.0f);
+        enemy.SetEnemyType(enemyType, enemyLevel);
     }
     
     // Start is called before the first frame update
     void Start()
     {
-        GenerateFloor(0);
-        GenerateFloor(1);
-        GenerateFloor(2);
-        GenerateFloor(3);
-        GenerateFloor(4);
+        for(int i = 0; i < 16; i++){
+            GenerateFloor(i);
+        }
     }
 
     // Update is called once per frame

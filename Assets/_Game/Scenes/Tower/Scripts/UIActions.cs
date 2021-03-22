@@ -39,7 +39,7 @@ public class UIActions : MonoBehaviour
 
     private void UpdateUIComponents()
     {
-        goldText.text = gameState.inventory.gold.ToString();
+        goldText.text = gameState.inventory.gold.ToString() + "G";
         potionsText.text = gameState.inventory.GetItemByType(Item.ItemType.HealthPotion).amount.ToString();
         UpdatePotionCount();
     }
