@@ -7,12 +7,24 @@ using UnityEngine;
 public class Inventory : ScriptableObject
 {
     public event EventHandler OnItemListChanged;
+    public event EventHandler<StateEventArgs> OnGoldChanged;
     private List<Item> itemList;
+
+    [SerializeField]
+    private int _gold;
+    public int gold
+    {
+        get { return _gold; }
+        set {
+            if(_gold == value)
+                return;
+            _gold = value;
+            OnGoldChanged?.Invoke(this, new StateEventArgs {value = _gold});
+        }
+    }
 
     public Inventory() {
         itemList = new List<Item>();
-
-        //Debug.Log("Inventory");
     }
 
     public void AddItem(Item item)

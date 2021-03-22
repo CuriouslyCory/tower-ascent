@@ -10,18 +10,22 @@ public class PlayerCharacter : CharacterBase
     public GameObject currentFloor;
 
 
-    private enum PlayerState {
+    private enum PlayerStates {
         Idle,
         Dragging,
         Fighting,
         Dead,
     }
 
+    private PlayerStates playerState;
+
     protected override void Awake() {
         base.Awake();
         spriteRenderer = GetComponent<SpriteRenderer>();
         healthSystem.maxHealth = 11;
         healthSystem.health = 11;
+
+        healthSystem.OnHealthChanged += OnHealthChanged;
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
@@ -40,6 +44,17 @@ public class PlayerCharacter : CharacterBase
         if(collider.gameObject.name == "pfCastleRoom(Clone)"){
             onCastleFloor = false;
             currentFloor = null;
+        }
+    }
+
+    private void OnHealthChanged(object sender, EventArgs e)
+    {
+        if(healthSystem.health == 0)
+        {
+            if(animator != null){
+                animator.Play("Base Layer.Death");
+            }
+            playerState = PlayerStates.Dead;
         }
     }
 }

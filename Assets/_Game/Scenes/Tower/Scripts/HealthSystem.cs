@@ -25,6 +25,9 @@ public class HealthSystem
     public void Damage(int dmgAmt)
     {
         health -= dmgAmt;
+        if(health < 0){
+            health = 0;
+        }
     }
 
     public void Heal(int healAmt)

@@ -27,21 +27,26 @@ public class UIActions : MonoBehaviour
 
     void Start()
     {
-        gameState.OnGoldChanged += State_OnGoldChanged;
+        gameState.inventory.OnGoldChanged += State_OnGoldChanged;
         gameState.inventory.OnItemListChanged += Inventory_OnItemListChanged;
         UpdateUIComponents();
     }
 
+    private void OnDestroy() {
+        gameState.inventory.OnGoldChanged -= State_OnGoldChanged;
+        gameState.inventory.OnItemListChanged -= Inventory_OnItemListChanged;
+    }
+
     private void UpdateUIComponents()
     {
-        goldText.text = gameState.gold.ToString();
+        goldText.text = gameState.inventory.gold.ToString();
         potionsText.text = gameState.inventory.GetItemByType(Item.ItemType.HealthPotion).amount.ToString();
         UpdatePotionCount();
     }
 
     private void State_OnGoldChanged(object sender, StateEventArgs e)
     {
-        goldText.text = e.value.ToString();
+        goldText.text = e.value.ToString() + "G";
     }
 
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)

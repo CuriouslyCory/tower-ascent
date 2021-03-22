@@ -20,7 +20,12 @@ public class TavernActions : MonoBehaviour
         UpdateInventoryUIComponents();
         
         gameState.inventory.OnItemListChanged += Inventory_OnItemListChanged;
-        gameState.OnGoldChanged += State_OnGoldChanged;
+        gameState.inventory.OnGoldChanged += State_OnGoldChanged;
+    }
+
+    private void OnDestroy() {
+        gameState.inventory.OnItemListChanged -= Inventory_OnItemListChanged;
+        gameState.inventory.OnGoldChanged -= State_OnGoldChanged;
     }
 
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)
@@ -35,7 +40,7 @@ public class TavernActions : MonoBehaviour
 
     private void UpdateInventoryUIComponents()
     {
-        goldText.text = gameState.gold.ToString() + "G";
+        goldText.text = gameState.inventory.gold.ToString() + "G";
         Item potions = gameState.inventory.GetItemByType(Item.ItemType.HealthPotion);
         potionsText.text = "Potions: " + potions.amount.ToString();
     }
@@ -47,13 +52,10 @@ public class TavernActions : MonoBehaviour
     }
     public void OnClickBuyPotion()
     {
-        if(gameState.gold >= 10){
-            gameState.gold -= 10;
+        if(gameState.inventory.gold >= 10){
+            gameState.inventory.gold -= 10;
             gameState.inventory.AddItem(new Item {itemType = Item.ItemType.HealthPotion, amount = 1});
         }
     }
 
-    private void OnMouseUp() {
-        
-    }
 }

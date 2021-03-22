@@ -11,7 +11,7 @@ public class TitleGameMenu : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("Tavern");
-        gameState.gold = 20;
+        gameState.inventory.gold = 10;
         gameState.playerHealth = 12;
     }
 

@@ -9,23 +9,11 @@ public class GameState : ScriptableObject
 {
     
     public event EventHandler<StateEventArgs> OnPlayerHealthChanged;
-    public event EventHandler<StateEventArgs> OnGoldChanged;
+    
     public bool isInitialized = false;
     
     public Inventory inventory;
     
-    [SerializeField]
-    private int _gold;
-    public int gold
-    {
-        get { return _gold; }
-        set {
-            if(_gold == value)
-                return;
-            _gold = value;
-            OnGoldChanged?.Invoke(this, new StateEventArgs {value = _gold});
-        }
-    }
 
     [SerializeField]
     private int _playerHealth;
@@ -44,7 +32,7 @@ public class GameState : ScriptableObject
     {
         inventory = new Inventory();
         isInitialized = true;
-        gold = 10;
+        inventory.gold = 10;
         playerHealth = 12;
     }
 

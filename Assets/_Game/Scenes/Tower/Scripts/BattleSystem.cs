@@ -6,10 +6,11 @@ public class BattleSystem
     
     public static BattleSystem Create(PlayerCharacter _playerCharacter, NonPlayerCharacter _towerGuard)
     {
-        BattleSystem battleSystem = new BattleSystem(_playerCharacter, _towerGuard);
         GameObject gameObject = new GameObject("BattleSystem", typeof(MonoBehaviourHook));
-        gameObject.GetComponent<MonoBehaviourHook>().onUpdate = battleSystem.Update;
+        BattleSystem battleSystem = new BattleSystem(_playerCharacter, _towerGuard, gameObject);
 
+        gameObject.GetComponent<MonoBehaviourHook>().onUpdate = battleSystem.Update;
+        
         return battleSystem;
     }
 
@@ -31,14 +32,19 @@ public class BattleSystem
         EnemyAttack,
         PlayerDead,
         EnemyDead,
+        Complete
     }
 
     private BattleStates battleState;
+    private bool isDestroyed;
+    private GameObject gameObject;
 
-    private BattleSystem(PlayerCharacter _playerCharacter, NonPlayerCharacter _towerGuard)
+    private BattleSystem(PlayerCharacter _playerCharacter, NonPlayerCharacter _towerGuard, GameObject gameObject)
     {
+        this.isDestroyed = false;
         this.playerCharacter = _playerCharacter;
         this.towerGuard = _towerGuard;
+        this.gameObject = gameObject;
     }
 
     public void Start()
@@ -60,6 +66,9 @@ public class BattleSystem
                 break;
             case BattleStates.EnemyDead:
                 Debug.Log("Enemy Dead");
+                LootEnemy();
+                battleState = BattleStates.Complete;
+                DestroySelf();
                 break;
             case BattleStates.PlayerDead:
                 Debug.Log("Player Dead");
@@ -83,6 +92,20 @@ public class BattleSystem
             battleState = battleState == BattleStates.PlayerAttack ? BattleStates.EnemyDead : BattleStates.PlayerDead;
         }
         
+    }
+
+    private void LootEnemy()
+    {
+        for(int i = 0; i < towerGuard.loot.Count; i++){
+            playerCharacter.inventory.AddItem(towerGuard.loot[i]);
+        }
+        playerCharacter.inventory.gold += towerGuard.gold;
+    }
+
+    private void DestroySelf()
+    {
+        isDestroyed = true;
+        UnityEngine.Object.Destroy(gameObject);
     }
 
     
