@@ -40,7 +40,6 @@ public class PlayerController : MonoBehaviour
         if(gameState.playerHealth > 0 && controllerState == ControllerStates.Idle){
             controllerState = ControllerStates.Dragging;
             _rb.isKinematic = true;
-            //animator.enabled = false;
             dragOrigin = playerCharacter.transform.position;
         }
     }
@@ -53,6 +52,7 @@ public class PlayerController : MonoBehaviour
         if(playerCharacter.currentFloor != null && controllerState == ControllerStates.Dragging){
             playerCharacter.transform.position = playerCharacter.currentFloor.transform.position + playerCharacter.currentFloor.transform.TransformDirection(new Vector3(6,0));
             controllerState = ControllerStates.Battle;
+            playerCharacter.playerState = PlayerCharacter.PlayerStates.Fighting;
             Debug.Log("Ready to fight");
             Debug.Log(playerCharacter.currentFloor.transform.GetChild(3));
             //playerCharacter.currentFloor.transform.Find
@@ -73,6 +73,7 @@ public class PlayerController : MonoBehaviour
         switch(e.value){
             case BattleSystem.BattleStates.Complete:
                 controllerState = ControllerStates.Idle;
+                playerCharacter.playerState = PlayerCharacter.PlayerStates.Idle;
                 break;
             default:
                 break;

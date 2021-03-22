@@ -22,6 +22,9 @@ public class UIActions : MonoBehaviour
     private Button usePotButton;
 
     [SerializeField]
+    private Button returnToTavernButton;
+
+    [SerializeField]
     private PlayerCharacter playerCharacter;
 
 
@@ -29,6 +32,7 @@ public class UIActions : MonoBehaviour
     {
         gameState.inventory.OnGoldChanged += State_OnGoldChanged;
         gameState.inventory.OnItemListChanged += Inventory_OnItemListChanged;
+        playerCharacter.OnPlayerStateChanged += PlayerCharacter_OnPlayerStateChanged;
         UpdateUIComponents();
     }
 
@@ -52,6 +56,17 @@ public class UIActions : MonoBehaviour
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)
     {
         UpdatePotionCount();
+    }
+
+    private void PlayerCharacter_OnPlayerStateChanged(object sedner, PlayerStateEventArgs e) {
+        switch(e.value){
+            case PlayerCharacter.PlayerStates.Idle:
+                returnToTavernButton.enabled = true;
+                break;
+            default:
+                returnToTavernButton.enabled = false;
+                break;
+        }
     }
 
     private void UpdatePotionCount()
@@ -85,9 +100,4 @@ public class UIActions : MonoBehaviour
         SceneManager.LoadScene("Tavern");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -9,15 +9,27 @@ public class PlayerCharacter : CharacterBase
     public bool onCastleFloor;
     public GameObject currentFloor;
 
+    public EventHandler<PlayerStateEventArgs> OnPlayerStateChanged;
 
-    private enum PlayerStates {
+
+    public enum PlayerStates {
         Idle,
         Dragging,
         Fighting,
         Dead,
     }
 
-    private PlayerStates playerState;
+    private PlayerStates _playerState;
+    public PlayerStates playerState{
+        get { return _playerState; }
+        set {
+            if(value == _playerState)
+                return;
+            
+            _playerState = value;
+            OnPlayerStateChanged?.Invoke(this, new PlayerStateEventArgs {value = value});
+        }
+    }
 
     protected override void Awake() {
         base.Awake();
