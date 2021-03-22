@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public class PlayerCharacter : CharacterBase
 {
@@ -8,6 +9,7 @@ public class PlayerCharacter : CharacterBase
     public bool onCastleFloor;
     public GameObject currentFloor;
 
+
     private enum PlayerState {
         Idle,
         Dragging,
@@ -15,14 +17,17 @@ public class PlayerCharacter : CharacterBase
         Dead,
     }
 
-    private PlayerCharacter()
-    {
+    protected override void Awake() {
+        base.Awake();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        healthSystem.maxHealth = 11;
+        healthSystem.health = 11;
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        Debug.Log("triggered");
+        Debug.Log("enter triggered");
         Debug.Log(collider.gameObject.name);
-        if(collider.gameObject.name == "Castle - Background"){
+        if(collider.gameObject.name == "pfCastleRoom(Clone)"){
             onCastleFloor = true;
             currentFloor = collider.gameObject;
         }
@@ -30,9 +35,9 @@ public class PlayerCharacter : CharacterBase
     }
 
     void OnTriggerExit2D(Collider2D collider) {
-        Debug.Log("triggered");
+        Debug.Log("exit triggered");
         Debug.Log(collider.gameObject);
-        if(collider.gameObject.name == "Castle - Background"){
+        if(collider.gameObject.name == "pfCastleRoom(Clone)"){
             onCastleFloor = false;
             currentFloor = null;
         }

@@ -5,48 +5,61 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     
-    private bool isDragging;
     private Vector2 dragOrigin;
 
     private Rigidbody2D _rb;
     private TextMesh _playerHealthText;
+    private Animator animator;
 
     [SerializeField]
     private GameState gameState;
 
     public PlayerCharacter playerCharacter;
 
+    private enum ControllerStates {
+        Idle,
+        Dragging,
+        Battle,
+    }
+    private ControllerStates controllerState;
+
     void Awake() 
     {
         _rb = GetComponent<Rigidbody2D>();
-        _playerHealthText = transform.Find("HealthText").GetComponent<TextMesh>();
-        gameState.OnPlayerHealthChanged += OnPlayerHealthChanged;
         playerCharacter = gameObject.GetComponent<PlayerCharacter>();
+        animator = gameObject.transform.Find("Sprite").GetComponent<Animator>();
+        controllerState = ControllerStates.Idle;
     }
 
-    private void OnPlayerHealthChanged(object sender, StateEventArgs e) {
-        _playerHealthText.text = e.value.ToString();
-    }
 
     void OnMouseDown() 
     {
-        if(gameState.playerHealth > 0){
-            isDragging = true;
+        Debug.Log("Mousedown");
+        if(gameState.playerHealth > 0 && controllerState == ControllerStates.Idle){
+            controllerState = ControllerStates.Dragging;
             _rb.isKinematic = true;
-            dragOrigin = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            //animator.enabled = false;
+            dragOrigin = playerCharacter.transform.position;
         }
     }
 
     void OnMouseUp() 
     {
-        isDragging = false;
+        Debug.Log("MouseUp");
         _rb.isKinematic = false;
-        if(playerCharacter.currentFloor == true){
+        //animator.enabled = true;
+        if(playerCharacter.currentFloor != null && controllerState == ControllerStates.Dragging){
+            playerCharacter.transform.position = playerCharacter.currentFloor.transform.position + playerCharacter.currentFloor.transform.TransformDirection(new Vector3(6,0));
+            controllerState = ControllerStates.Battle;
             Debug.Log("Ready to fight");
-            NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.parent.Find("Enemy(Clone)").GetComponent<NonPlayerCharacter>();
-            //BattleSystem battleSystem = new BattleSystem(playerCharacter, enemy);
+            Debug.Log(playerCharacter.currentFloor.transform.GetChild(3));
+            //playerCharacter.currentFloor.transform.Find
+            NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.GetChild(3).GetComponent<NonPlayerCharacter>();
+            BattleSystem battleSystem = BattleSystem.Create(playerCharacter, enemy);
+            battleSystem.Start();
         }else{
             transform.position = dragOrigin;
+            controllerState = ControllerStates.Idle;
         }
 
     }
@@ -54,7 +67,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isDragging == true){
+        if(controllerState == ControllerStates.Dragging){
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             transform.Translate(mousePosition);
         }
@@ -62,4 +75,3 @@ public class PlayerController : MonoBehaviour
     }
 
 }
-

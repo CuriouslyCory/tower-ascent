@@ -12,7 +12,7 @@ public class Inventory : ScriptableObject
     public Inventory() {
         itemList = new List<Item>();
 
-        Debug.Log("Inventory");
+        //Debug.Log("Inventory");
     }
 
     public void AddItem(Item item)
@@ -41,7 +41,7 @@ public class Inventory : ScriptableObject
                 return inventoryItem;
             }
         }
-        Debug.Log("None found");
+        //Debug.Log("None found");
         // if we didn't find one go ahead and return an empty item of that type
         return new Item{itemType = itemType, amount = 0}; 
     }
