@@ -35,12 +35,12 @@ public class NonPlayerCharacter : CharacterBase
 
         spriteRenderer.sprite = GetSprite();
         spriteRenderer.flipX = true;
-        healthSystem.maxHealth = level * 5 + UnityEngine.Random.Range(1, 5);
+        healthSystem.maxHealth = level * 5 + (UnityEngine.Random.Range(1 , 5 * level) / 2);
         healthSystem.health = healthSystem.maxHealth;
         dmgPotential = new int[2];
         dmgPotential[0] = 1 * level;
         dmgPotential[1] = 3;
-        gold = UnityEngine.Random.Range(1, 5);
+        gold = UnityEngine.Random.Range(1, 5 * level);
         AddRandomItems(level);
     }
 
