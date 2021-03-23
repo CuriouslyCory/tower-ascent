@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     private Vector2 dragOrigin;
 
     private Rigidbody2D _rb;
-    private TextMesh _playerHealthText;
     private Animator animator;
 
     [SerializeField]
@@ -50,17 +49,19 @@ public class PlayerController : MonoBehaviour
         _rb.isKinematic = false;
         //animator.enabled = true;
         if(playerCharacter.currentFloor != null && controllerState == ControllerStates.Dragging){
+            // snap player to floor
             playerCharacter.transform.position = playerCharacter.currentFloor.transform.position + playerCharacter.currentFloor.transform.TransformDirection(new Vector3(6,0));
             controllerState = ControllerStates.Battle;
             playerCharacter.playerState = PlayerCharacter.PlayerStates.Fighting;
-            Debug.Log("Ready to fight");
-            Debug.Log(playerCharacter.currentFloor.transform.GetChild(3));
-            //playerCharacter.currentFloor.transform.Find
+           
+            // start battle
             NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.GetChild(3).GetComponent<NonPlayerCharacter>();
             BattleSystem battleSystem = BattleSystem.Create(playerCharacter, enemy);
             battleSystem.Start();
+
+            // snap cam to floor height
             mainCam.transform.position = new Vector3(mainCam.transform.position.x, playerCharacter.transform.position.y, mainCam.transform.position.z);
-            battleSystem.OnStateChanged += BattleSystem_OnStateChanged;
+            battleSystem.OnStateChanged += BattleSystem_OnStateChanged; 
         }else if(playerCharacter.currentFloor == null && controllerState == ControllerStates.Dragging) {
             transform.position = dragOrigin;
             controllerState = ControllerStates.Idle;

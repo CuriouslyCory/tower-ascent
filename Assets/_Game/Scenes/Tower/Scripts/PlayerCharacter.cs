@@ -7,7 +7,22 @@ public class PlayerCharacter : CharacterBase
     public Inventory inventory;
 
     public bool onCastleFloor;
-    public GameObject currentFloor;
+    
+    public EventHandler OnFloorChanged;
+    
+    private GameObject _currentFloor;
+    public GameObject currentFloor
+    {
+        get { return _currentFloor; }
+        set {
+            if(value == _currentFloor)
+                return;
+            
+            _currentFloor = value;
+            OnFloorChanged?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
 
     public EventHandler<PlayerStateEventArgs> OnPlayerStateChanged;
 
@@ -48,7 +63,7 @@ public class PlayerCharacter : CharacterBase
         Debug.Log(collider.gameObject.name);
         if(collider.gameObject.name == "pfCastleRoom(Clone)"){
             onCastleFloor = true;
-            currentFloor = collider.gameObject;
+            currentFloor = collider.gameObject;          
         }
         
     }

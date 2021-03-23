@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -30,12 +29,16 @@ public class UIActions : MonoBehaviour
     [SerializeField]
     private GameObject gameOverPanel;
 
+    [SerializeField]
+    private TextMeshProUGUI floorText;
+
 
     void Start()
     {
         gameState.inventory.OnGoldChanged += State_OnGoldChanged;
         gameState.inventory.OnItemListChanged += Inventory_OnItemListChanged;
         playerCharacter.OnPlayerStateChanged += PlayerCharacter_OnPlayerStateChanged;
+        playerCharacter.OnFloorChanged += PlayerCharacter_OnFloorChanged;
         UpdateUIComponents();
     }
 
@@ -59,6 +62,11 @@ public class UIActions : MonoBehaviour
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)
     {
         UpdatePotionCount();
+    }
+
+    private void PlayerCharacter_OnFloorChanged(object sender, EventArgs e)
+    {
+        floorText.text = "Floor: " + playerCharacter.currentFloor.GetComponent<TowerFloor>().floorNumber.ToString();
     }
 
     private void PlayerCharacter_OnPlayerStateChanged(object sedner, PlayerStateEventArgs e) {

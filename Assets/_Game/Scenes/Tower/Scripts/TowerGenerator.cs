@@ -16,6 +16,7 @@ public class TowerGenerator : MonoBehaviour
     private void GenerateFloor(int floor){
         Vector3 position = new Vector3(-10,-2 + (floor * 4));
         GameObject newFloor = Instantiate(towerRoom_1, position, Quaternion.identity, grid);
+        newFloor.GetComponent<TowerFloor>().floorNumber = floor + 1;
         SpawnEnemy(NonPlayerCharacter.EnemyType.Enemy1, floor, new Vector3(newFloor.transform.position.x + 4, newFloor.transform.position.y), newFloor.transform);
         floors.Add(newFloor);
     }
