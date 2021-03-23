@@ -11,13 +11,12 @@ public class PlayerCharacter : CharacterBase
     public EventHandler OnFloorChanged;
     
     private GameObject _currentFloor;
-    public GameObject currentFloor
-    {
+    public GameObject currentFloor {
         get { return _currentFloor; }
         set {
             if(value == _currentFloor)
                 return;
-            
+
             _currentFloor = value;
             OnFloorChanged?.Invoke(this, EventArgs.Empty);
         }
@@ -35,7 +34,7 @@ public class PlayerCharacter : CharacterBase
     }
 
     private PlayerStates _playerState;
-    public PlayerStates playerState{
+    public PlayerStates playerState {
         get { return _playerState; }
         set {
             if(value == _playerState)
@@ -59,9 +58,10 @@ public class PlayerCharacter : CharacterBase
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
-        Debug.Log("enter triggered");
-        Debug.Log(collider.gameObject.name);
         if(collider.gameObject.name == "pfCastleRoom(Clone)"){
+            Debug.Log("Setting Current Floor");
+            Debug.Log(collider.gameObject.name);
+            Debug.Log(collider.gameObject.GetType());
             onCastleFloor = true;
             currentFloor = collider.gameObject;          
         }

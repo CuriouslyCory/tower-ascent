@@ -69,7 +69,7 @@ public class UIActions : MonoBehaviour
         floorText.text = "Floor: " + playerCharacter.currentFloor.GetComponent<TowerFloor>().floorNumber.ToString();
     }
 
-    private void PlayerCharacter_OnPlayerStateChanged(object sedner, PlayerStateEventArgs e) {
+    private void PlayerCharacter_OnPlayerStateChanged(object sender, PlayerStateEventArgs e) {
         switch(e.value){
             case PlayerCharacter.PlayerStates.Idle:
                 returnToTavernButton.enabled = true;

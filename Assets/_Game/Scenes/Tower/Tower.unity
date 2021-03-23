@@ -5394,7 +5394,7 @@ MonoBehaviour:
   returnToTavernButton: {fileID: 620603629}
   playerCharacter: {fileID: 38725429}
   gameOverPanel: {fileID: 1792696834}
-  floorText: {fileID: 0}
+  floorText: {fileID: 1419402034}
 --- !u!4 &1720955891
 Transform:
   m_ObjectHideFlags: 0
