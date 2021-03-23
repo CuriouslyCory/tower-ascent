@@ -27,6 +27,9 @@ public class UIActions : MonoBehaviour
     [SerializeField]
     private PlayerCharacter playerCharacter;
 
+    [SerializeField]
+    private GameObject gameOverPanel;
+
 
     void Start()
     {
@@ -63,6 +66,9 @@ public class UIActions : MonoBehaviour
             case PlayerCharacter.PlayerStates.Idle:
                 returnToTavernButton.enabled = true;
                 break;
+            case PlayerCharacter.PlayerStates.Dead:
+                gameOverPanel.SetActive(true);
+                break;
             default:
                 returnToTavernButton.enabled = false;
                 break;
@@ -98,6 +104,16 @@ public class UIActions : MonoBehaviour
     private void ReturnToTavern()
     {
         SceneManager.LoadScene("Tavern");
+    }
+
+    public void OnStartOverClick()
+    {
+        StartOver();
+    }
+
+    public void StartOver()
+    {
+        SceneManager.LoadScene("Main Menu");
     }
 
 }
