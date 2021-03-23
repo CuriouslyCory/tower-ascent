@@ -23,11 +23,13 @@ public class TowerGenerator : MonoBehaviour
     private void SpawnEnemy(NonPlayerCharacter.EnemyType enemyType, int floor, Vector3 location, Transform parent)
     {
         Transform enemyObject = Instantiate(EnemyAssets.Instance.pfNonPlayerCharacter, location, Quaternion.identity, parent);
-        Debug.Log(enemyObject);
         NonPlayerCharacter enemy = enemyObject.GetComponent<NonPlayerCharacter>();
-        Debug.Log(enemy);
+        
         // every 5 floors increase the level of the mobs
         int enemyLevel = (int)Math.Ceiling(floor /  5.0f);
+        
+        // minimum level of 1
+        enemyLevel = enemyLevel < 1 ? 1 : enemyLevel;
         enemy.SetEnemyType(enemyType, enemyLevel);
     }
     

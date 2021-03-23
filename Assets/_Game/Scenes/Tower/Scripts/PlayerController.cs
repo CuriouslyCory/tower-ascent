@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void OnMouseDown() 
     {
         Debug.Log("Mousedown");
-        if(gameState.playerHealth > 0 && controllerState == ControllerStates.Idle){
+        if(playerCharacter.playerState != PlayerCharacter.PlayerStates.Dead && controllerState == ControllerStates.Idle){
             controllerState = ControllerStates.Dragging;
             _rb.isKinematic = true;
             dragOrigin = playerCharacter.transform.position;

@@ -34,8 +34,8 @@ public class PlayerCharacter : CharacterBase
     protected override void Awake() {
         base.Awake();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        healthSystem.maxHealth = 11;
-        healthSystem.health = 11;
+        healthSystem.maxHealth = gameState.playerMaxHealth;
+        healthSystem.health = healthSystem.maxHealth;
 
         healthSystem.OnHealthChanged += OnHealthChanged;
     }

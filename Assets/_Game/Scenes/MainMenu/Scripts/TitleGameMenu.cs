@@ -10,9 +10,10 @@ public class TitleGameMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        gameState.Initialize();
+        gameState.inventory.gold = 0;
+        gameState.playerMaxHealth = 10;
         SceneManager.LoadScene("Tavern");
-        gameState.inventory.gold = 10;
-        gameState.playerHealth = 12;
     }
 
     public void QuitGame()

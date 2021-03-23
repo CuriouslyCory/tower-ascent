@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInitialized: 0
   inventory: {fileID: 11400000, guid: 441fcff925d572048a33ac40f62cbc98, type: 2}
-  _gold: 20
-  _playerHealth: 12
+  _playerMaxHealth: 5

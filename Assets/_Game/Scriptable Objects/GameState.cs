@@ -8,32 +8,27 @@ using UnityEngine;
 public class GameState : ScriptableObject
 {
     
-    public event EventHandler<StateEventArgs> OnPlayerHealthChanged;
-    
+   
     public bool isInitialized = false;
     
     public Inventory inventory;
     
 
     [SerializeField]
-    private int _playerHealth;
-    public int playerHealth
+    private int _playerMaxHealth;
+    public int playerMaxHealth
     {
-        get => _playerHealth;
+        get => _playerMaxHealth;
         set {
-            if(_playerHealth == value)
+            if(_playerMaxHealth == value)
                 return;
-            _playerHealth = value;
-            OnPlayerHealthChanged?.Invoke(this, new StateEventArgs {value = _playerHealth});
+            _playerMaxHealth = value;
         }
     }
 
     public void Initialize()
     {
-        inventory = new Inventory();
         isInitialized = true;
-        inventory.gold = 10;
-        playerHealth = 12;
     }
 
 }
