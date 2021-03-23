@@ -36,6 +36,9 @@ public class PlayerCharacter : CharacterBase
         spriteRenderer = GetComponent<SpriteRenderer>();
         healthSystem.maxHealth = gameState.playerMaxHealth;
         healthSystem.health = healthSystem.maxHealth;
+        healthSystem.SetArmor(gameState.armorLevel);
+        dmgPotential[0] = gameState.swordLevel;
+        dmgPotential[1] = gameState.swordLevel + 3;
 
         healthSystem.OnHealthChanged += OnHealthChanged;
     }

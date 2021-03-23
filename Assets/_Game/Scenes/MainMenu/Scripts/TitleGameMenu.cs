@@ -11,8 +11,11 @@ public class TitleGameMenu : MonoBehaviour
     public void PlayGame()
     {
         gameState.Initialize();
-        gameState.inventory.gold = 0;
+        gameState.inventory.gold = 400;
         gameState.playerMaxHealth = 10;
+        gameState.armorLevel = 1;
+        gameState.swordLevel = 1;
+        gameState.constitutionLevel = 1;
         SceneManager.LoadScene("Tavern");
     }
 

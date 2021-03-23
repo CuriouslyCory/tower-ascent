@@ -26,6 +26,10 @@ public class GameState : ScriptableObject
         }
     }
 
+    public int swordLevel;
+    public int armorLevel;
+    public int constitutionLevel;
+
     public void Initialize()
     {
         isInitialized = true;

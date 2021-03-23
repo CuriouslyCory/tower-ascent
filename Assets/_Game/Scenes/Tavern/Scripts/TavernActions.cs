@@ -13,7 +13,14 @@ public class TavernActions : MonoBehaviour
     private TextMeshProUGUI goldText;
     [SerializeField]
     private TextMeshProUGUI potionsText;
-    
+    [SerializeField]
+    private TextMeshProUGUI maxHpText;
+    [SerializeField]
+    private TextMeshProUGUI constitutionLevelText;
+    [SerializeField]
+    private TextMeshProUGUI swordLevelText;
+    [SerializeField]
+    private TextMeshProUGUI armorLevelText;
 
     private void Start() 
     {
@@ -21,6 +28,11 @@ public class TavernActions : MonoBehaviour
         
         gameState.inventory.OnItemListChanged += Inventory_OnItemListChanged;
         gameState.inventory.OnGoldChanged += State_OnGoldChanged;
+        maxHpText.text = "Max HP: " + gameState.playerMaxHealth.ToString();
+        constitutionLevelText.text = "Constitution Level: " + gameState.constitutionLevel.ToString();
+        swordLevelText.text = "Sword Level: " + gameState.swordLevel.ToString();
+        armorLevelText.text = "Armor Level: " + gameState.armorLevel.ToString();
+
     }
 
     private void OnDestroy() {
@@ -56,6 +68,51 @@ public class TavernActions : MonoBehaviour
             gameState.inventory.gold -= 10;
             gameState.inventory.AddItem(new Item {itemType = Item.ItemType.HealthPotion, amount = 1});
         }
+    }
+
+    public void OnClickTrainConstitution()
+    {
+        TrainConstitution();
+    }
+
+    private void TrainConstitution()
+    {
+        if(gameState.inventory.gold >= 100){
+            gameState.inventory.gold -= 100;
+            gameState.constitutionLevel++;
+            gameState.playerMaxHealth += 10;
+            maxHpText.text = "Max HP: " + gameState.playerMaxHealth.ToString();
+            constitutionLevelText.text = "Constitution Level: " + gameState.constitutionLevel.ToString();
+        }
+    }
+
+    public void OnClickTrainSword()
+    {
+        TrainSword();
+    }
+
+    private void TrainSword()
+    {
+        if(gameState.inventory.gold >= 100){
+            gameState.inventory.gold -= 100;
+            gameState.swordLevel++;
+            swordLevelText.text = "Sword Level: " + gameState.swordLevel.ToString();
+        }
+    }
+
+    public void OnClickTrainArmor()
+    {
+        TrainArmor();
+    }
+
+    private void TrainArmor()
+    {
+        if(gameState.inventory.gold >= 100){
+            gameState.inventory.gold -= 100;
+            gameState.armorLevel++;
+            armorLevelText.text = "Armor Level: " + gameState.armorLevel.ToString();
+        }
+
     }
 
 }

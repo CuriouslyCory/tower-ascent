@@ -6,6 +6,8 @@ public class HealthSystem
     
     public int maxHealth;
     private int _health;
+
+    private int armor;
     
     public int health
     {
@@ -18,13 +20,13 @@ public class HealthSystem
         }
     }
 
-    public HealthSystem(){
-        
-    }
+    public HealthSystem(){}
 
     public void Damage(int dmgAmt)
     {
-        health -= dmgAmt;
+        int dmg = dmgAmt - armor;
+        // don't heal from having too much armor
+        health -= dmg > 0 ? dmg : 0;
         if(health < 0)
             health = 0;
     }
@@ -36,4 +38,10 @@ public class HealthSystem
             health = maxHealth;
     }
 
+    public void SetArmor(int armor)
+    {
+        this.armor = armor;
+    }
+
 }
+
