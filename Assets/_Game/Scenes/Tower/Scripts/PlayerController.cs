@@ -47,25 +47,43 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("MouseUp");
         _rb.isKinematic = false;
-        //animator.enabled = true;
+        
+        //get enemy
+        NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.GetChild(3).GetComponent<NonPlayerCharacter>();
+        
         if(playerCharacter.currentFloor != null && controllerState == ControllerStates.Dragging){
             // snap player to floor
             playerCharacter.transform.position = playerCharacter.currentFloor.transform.position + playerCharacter.currentFloor.transform.TransformDirection(new Vector3(6,0));
-            controllerState = ControllerStates.Battle;
-            playerCharacter.playerState = PlayerCharacter.PlayerStates.Fighting;
-           
-            // start battle
-            NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.GetChild(3).GetComponent<NonPlayerCharacter>();
-            BattleSystem battleSystem = BattleSystem.Create(playerCharacter, enemy);
-            battleSystem.Start();
-
+            
             // snap cam to floor height
             mainCam.transform.position = new Vector3(mainCam.transform.position.x, playerCharacter.transform.position.y, mainCam.transform.position.z);
-            battleSystem.OnStateChanged += BattleSystem_OnStateChanged; 
+
+            if(enemy.healthSystem.health > 0){
+                StartBattle();
+            }else{
+                controllerState = ControllerStates.Idle;
+            }
+            
         }else if(playerCharacter.currentFloor == null && controllerState == ControllerStates.Dragging) {
             transform.position = dragOrigin;
             controllerState = ControllerStates.Idle;
         }
+
+    }
+
+    private void StartBattle()
+    {
+        // get enemy
+        NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.GetChild(3).GetComponent<NonPlayerCharacter>();
+        
+        // set states
+        controllerState = ControllerStates.Battle;
+        playerCharacter.playerState = PlayerCharacter.PlayerStates.Fighting;
+
+        // start battle
+        BattleSystem battleSystem = BattleSystem.Create(playerCharacter, enemy);
+        battleSystem.Start();
+        battleSystem.OnStateChanged += BattleSystem_OnStateChanged; 
 
     }
 
