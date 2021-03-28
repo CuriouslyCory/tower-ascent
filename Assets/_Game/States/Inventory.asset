@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959fc1cac06da4348b0d41b83170ffb3, type: 3}
   m_Name: Inventory
   m_EditorClassIdentifier: 
-  _gold: 0
+  _gold: 400

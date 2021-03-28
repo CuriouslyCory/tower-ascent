@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
+using CodeMonkey.Utils;
 using TMPro;
 
 public class TavernActions : MonoBehaviour
@@ -13,31 +15,84 @@ public class TavernActions : MonoBehaviour
     private TextMeshProUGUI goldText;
     [SerializeField]
     private TextMeshProUGUI potionsText;
+    
     [SerializeField]
-    private TextMeshProUGUI maxHpText;
+    private GameObject pfUpgradeButton;
+
     [SerializeField]
-    private TextMeshProUGUI constitutionLevelText;
+    private Transform menuContainer;
+
     [SerializeField]
-    private TextMeshProUGUI swordLevelText;
+    private GameObject pfStatText;
+
     [SerializeField]
-    private TextMeshProUGUI armorLevelText;
+    private Transform statsPanel;
+
+    private List<GameObject> buttonObjs;
+    private List<GameObject> statTexts;
+
 
     private void Start() 
     {
+        buttonObjs = new List<GameObject>();
+        statTexts = new List<GameObject>();
+
+        if(gameState.stats == null || gameState.stats.Count == 0){
+            gameState.Initialize();
+        }
+        
         UpdateInventoryUIComponents();
         
         gameState.inventory.OnItemListChanged += Inventory_OnItemListChanged;
         gameState.inventory.OnGoldChanged += State_OnGoldChanged;
-        maxHpText.text = "Max HP: " + gameState.playerMaxHealth.ToString();
-        constitutionLevelText.text = "Constitution Level: " + gameState.constitutionLevel.ToString();
-        swordLevelText.text = "Sword Level: " + gameState.swordLevel.ToString();
-        armorLevelText.text = "Armor Level: " + gameState.armorLevel.ToString();
 
+        GenerateUpgradeMenu();
+        // maxHpText.text = "Max HP: " + gameState.playerMaxHealth.ToString();
+        
+    }
+
+    private void GenerateUpgradeMenu()
+    {
+        foreach(UpgradeableStat stat in gameState.stats.Values)
+        {
+            CreateUpgradeButton(stat);
+            CreateStatText(stat);
+        }
+    }
+
+    private void CreateUpgradeButton(UpgradeableStat stat)
+    {
+        buttonObjs.Add(Instantiate(pfUpgradeButton, menuContainer));
+        buttonObjs[buttonObjs.Count - 1].GetComponent<UpgradeButton>().SetStat(stat);
+        
+        buttonObjs[buttonObjs.Count - 1].GetComponent<Button_UI>().ClickFunc = () => {
+            OnUpgradeClick(stat);
+        };
+    }
+
+    private void CreateStatText(UpgradeableStat stat)
+    {
+        statTexts.Add(Instantiate(pfStatText, statsPanel));
+        statTexts[statTexts.Count - 1].GetComponent<StatText>().SetStat(stat);
+    }
+
+    public void OnUpgradeClick(UpgradeableStat stat)
+    {
+        Debug.Log("Upgrade clicked: " + stat.name);
+        int statLevel = stat.statLevel;
+        Debug.Log("Stat current lvl: " + statLevel);
+        int statCost = stat.price[statLevel - 1];
+        Debug.Log("Stat current cost: " + statCost);
+        if(gameState.inventory.gold > statCost){
+            stat.statLevel++;
+            gameState.inventory.gold -= statCost;
+        }
     }
 
     private void OnDestroy() {
         gameState.inventory.OnItemListChanged -= Inventory_OnItemListChanged;
         gameState.inventory.OnGoldChanged -= State_OnGoldChanged;
+  
     }
 
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)
@@ -62,6 +117,7 @@ public class TavernActions : MonoBehaviour
     {
         SceneManager.LoadScene("Tower", LoadSceneMode.Single);
     }
+
     public void OnClickBuyPotion()
     {
         if(gameState.inventory.gold >= 10){
@@ -69,50 +125,4 @@ public class TavernActions : MonoBehaviour
             gameState.inventory.AddItem(new Item {itemType = Item.ItemType.HealthPotion, amount = 1});
         }
     }
-
-    public void OnClickTrainConstitution()
-    {
-        TrainConstitution();
-    }
-
-    private void TrainConstitution()
-    {
-        if(gameState.inventory.gold >= 100){
-            gameState.inventory.gold -= 100;
-            gameState.constitutionLevel++;
-            gameState.playerMaxHealth += 10;
-            maxHpText.text = "Max HP: " + gameState.playerMaxHealth.ToString();
-            constitutionLevelText.text = "Constitution Level: " + gameState.constitutionLevel.ToString();
-        }
-    }
-
-    public void OnClickTrainSword()
-    {
-        TrainSword();
-    }
-
-    private void TrainSword()
-    {
-        if(gameState.inventory.gold >= 100){
-            gameState.inventory.gold -= 100;
-            gameState.swordLevel++;
-            swordLevelText.text = "Sword Level: " + gameState.swordLevel.ToString();
-        }
-    }
-
-    public void OnClickTrainArmor()
-    {
-        TrainArmor();
-    }
-
-    private void TrainArmor()
-    {
-        if(gameState.inventory.gold >= 100){
-            gameState.inventory.gold -= 100;
-            gameState.armorLevel++;
-            armorLevelText.text = "Armor Level: " + gameState.armorLevel.ToString();
-        }
-
-    }
-
-}
+} 

@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4587e65f8345848ba484ff1e322fc4, type: 3}
   m_Name: GameState
   m_EditorClassIdentifier: 
-  isInitialized: 1
+  isInitialized: 0
   inventory: {fileID: 11400000, guid: 441fcff925d572048a33ac40f62cbc98, type: 2}
   _playerMaxHealth: 10
-  swordLevel: 1
-  armorLevel: 1
-  constitutionLevel: 1

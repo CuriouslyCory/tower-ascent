@@ -50,9 +50,10 @@ public class PlayerCharacter : CharacterBase
         spriteRenderer = GetComponent<SpriteRenderer>();
         healthSystem.maxHealth = gameState.playerMaxHealth;
         healthSystem.health = healthSystem.maxHealth;
-        healthSystem.SetArmor(gameState.armorLevel);
-        dmgPotential[0] = gameState.swordLevel;
-        dmgPotential[1] = gameState.swordLevel + 3;
+        healthSystem.SetArmor(gameState.stats["armor"].statLevel);
+        dmgPotential[0] = gameState.stats["sword"].statLevel;
+        dmgPotential[1] = gameState.stats["sword"].statLevel + 3;
+        currentFloor = null;
 
         healthSystem.OnHealthChanged += OnHealthChanged;
     }
