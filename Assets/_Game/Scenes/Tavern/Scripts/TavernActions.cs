@@ -57,7 +57,6 @@ public class TavernActions : MonoBehaviour
     private void OnDestroy() {
         gameState.inventory.OnItemListChanged -= Inventory_OnItemListChanged;
         gameState.inventory.OnGoldChanged -= State_OnGoldChanged;
-  
     }
 
     private void GenerateUpgradeMenu()

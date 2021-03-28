@@ -66,7 +66,11 @@ public class UIActions : MonoBehaviour
 
     private void PlayerCharacter_OnFloorChanged(object sender, EventArgs e)
     {
-        floorText.text = "Floor: " + playerCharacter.currentFloor.GetComponent<TowerFloor>().floorNumber.ToString();
+        if(playerCharacter.currentFloor != null){
+            floorText.text = "Floor: " + playerCharacter.currentFloor.GetComponent<TowerFloor>().floorNumber.ToString();
+        } else { 
+            floorText.text = "Floor: ???";
+        }
     }
 
     private void PlayerCharacter_OnPlayerStateChanged(object sender, PlayerStateEventArgs e) {

@@ -48,11 +48,9 @@ public class PlayerController : MonoBehaviour
         Debug.Log("MouseUp");
         _rb.isKinematic = false;
         
-        //get enemy
-        NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.GetChild(3).GetComponent<NonPlayerCharacter>();
-        
         if(playerCharacter.currentFloor != null && controllerState == ControllerStates.Dragging){
-            // snap player to floor
+            NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.GetChild(3).GetComponent<NonPlayerCharacter>();
+            // snap player to fighting position
             playerCharacter.transform.position = playerCharacter.currentFloor.transform.position + playerCharacter.currentFloor.transform.TransformDirection(new Vector3(6,0));
             
             // snap cam to floor height
@@ -75,7 +73,7 @@ public class PlayerController : MonoBehaviour
     {
         // get enemy
         NonPlayerCharacter enemy = playerCharacter.currentFloor.transform.GetChild(3).GetComponent<NonPlayerCharacter>();
-        
+
         // set states
         controllerState = ControllerStates.Battle;
         playerCharacter.playerState = PlayerCharacter.PlayerStates.Fighting;
