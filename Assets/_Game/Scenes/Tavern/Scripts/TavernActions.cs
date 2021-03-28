@@ -28,8 +28,12 @@ public class TavernActions : MonoBehaviour
     [SerializeField]
     private Transform statsPanel;
 
+    [SerializeField]
+    private TextMeshProUGUI maxHealthText;
+
     private List<GameObject> buttonObjs;
     private List<GameObject> statTexts;
+    
 
 
     private void Start() 
@@ -47,8 +51,13 @@ public class TavernActions : MonoBehaviour
         gameState.inventory.OnGoldChanged += State_OnGoldChanged;
 
         GenerateUpgradeMenu();
-        // maxHpText.text = "Max HP: " + gameState.playerMaxHealth.ToString();
+        maxHealthText.text = "Max HP: " + gameState.playerMaxHealth.ToString();
         
+    }
+    private void OnDestroy() {
+        gameState.inventory.OnItemListChanged -= Inventory_OnItemListChanged;
+        gameState.inventory.OnGoldChanged -= State_OnGoldChanged;
+  
     }
 
     private void GenerateUpgradeMenu()
@@ -78,7 +87,7 @@ public class TavernActions : MonoBehaviour
 
     public void OnUpgradeClick(UpgradeableStat stat)
     {
-        Debug.Log("Upgrade clicked: " + stat.name);
+        Debug.Log("Upgrade clicked: " + stat.statType);
         int statLevel = stat.statLevel;
         Debug.Log("Stat current lvl: " + statLevel);
         int statCost = stat.price[statLevel - 1];
@@ -87,13 +96,13 @@ public class TavernActions : MonoBehaviour
             stat.statLevel++;
             gameState.inventory.gold -= statCost;
         }
+        if(stat.statType == UpgradeableStat.StatType.Constitution){
+            gameState.playerMaxHealth = stat.statLevel * 10;
+            maxHealthText.text = "Max HP: " + gameState.playerMaxHealth.ToString();
+        }
     }
 
-    private void OnDestroy() {
-        gameState.inventory.OnItemListChanged -= Inventory_OnItemListChanged;
-        gameState.inventory.OnGoldChanged -= State_OnGoldChanged;
-  
-    }
+    
 
     private void Inventory_OnItemListChanged(object sender, System.EventArgs e)
     {

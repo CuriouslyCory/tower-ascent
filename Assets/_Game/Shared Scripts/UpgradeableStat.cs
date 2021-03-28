@@ -5,7 +5,12 @@ using UnityEngine;
 [Serializable]
 public class UpgradeableStat
 {
-    public string name;
+    public enum StatType {
+        Sword,
+        Armor,
+        Constitution
+    }
+    public StatType statType;
     public EventHandler<StatChangeEventArgs> OnLevelChanged;
     private int _statLevel;
     
@@ -16,7 +21,7 @@ public class UpgradeableStat
             if(_statLevel == value)
                 return;
             _statLevel = value;
-            OnLevelChanged?.Invoke(this, new StatChangeEventArgs {name = name, value = _statLevel});
+            OnLevelChanged?.Invoke(this, new StatChangeEventArgs {statType = statType, value = _statLevel});
         }
     }
 
@@ -27,6 +32,6 @@ public class UpgradeableStat
 
 public class StatChangeEventArgs: EventArgs
 {
-    public string name;
+    public UpgradeableStat.StatType statType;
     public int value;
 }

@@ -24,7 +24,7 @@ public class GameState : ScriptableObject
         }
     }
 
-    [SerializeField] public Dictionary<string, UpgradeableStat> stats;
+    [SerializeField] public Dictionary<UpgradeableStat.StatType, UpgradeableStat> stats;
 
     private void Awake() {
         Debug.Log("GameState awake");
@@ -33,13 +33,13 @@ public class GameState : ScriptableObject
 
     private void SetDefaultValues()
     {
-        inventory.gold = 400;
+        inventory.gold = 10;
         playerMaxHealth = 10;
 
-        stats = new Dictionary<string, UpgradeableStat> {
-            {"sword", new UpgradeableStat {name = "Sword", statLevel = 1, price = new int[] {50, 100, 200, 400, 600}}},
-            {"armor", new UpgradeableStat {name = "Armor", statLevel = 1, price = new int[] {50, 100, 200, 400, 600}}},
-            {"constitution", new UpgradeableStat {name = "Consitution", statLevel = 1, price = new int[] {50, 100, 200, 400, 600}}}
+        stats = new Dictionary<UpgradeableStat.StatType, UpgradeableStat> {
+            {UpgradeableStat.StatType.Sword, new UpgradeableStat {statType = UpgradeableStat.StatType.Sword, statLevel = 1, price = new int[] {50, 100, 200, 400, 600}}},
+            {UpgradeableStat.StatType.Armor, new UpgradeableStat {statType = UpgradeableStat.StatType.Armor, statLevel = 1, price = new int[] {50, 100, 200, 400, 600}}},
+            {UpgradeableStat.StatType.Constitution, new UpgradeableStat {statType = UpgradeableStat.StatType.Constitution, statLevel = 1, price = new int[] {50, 100, 200, 400, 600}}}
         };
     }
 

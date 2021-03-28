@@ -1075,6 +1075,7 @@ MonoBehaviour:
   menuContainer: {fileID: 13248831}
   pfStatText: {fileID: 3430098115131046612, guid: 704d57805c9fcc242b01de54ca4f06b1, type: 3}
   statsPanel: {fileID: 1988966560}
+  maxHealthText: {fileID: 857360002}
 --- !u!1 &1775829481
 GameObject:
   m_ObjectHideFlags: 0
