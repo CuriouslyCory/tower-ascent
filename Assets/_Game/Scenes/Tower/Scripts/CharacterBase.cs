@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using TMPro;
 
 public class CharacterBase: MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class CharacterBase: MonoBehaviour
     public SpriteRenderer spriteRenderer;
     public Animator animator;
 
-    public TextMesh healthText;
+    public TextMeshPro healthText;
 
     public Action onAttackAnimationComplete;
 
@@ -26,7 +27,7 @@ public class CharacterBase: MonoBehaviour
     {
         healthSystem = new HealthSystem();
         if(transform.Find("HealthText")){
-            healthText = transform.Find("HealthText").GetComponent<TextMesh>();
+            healthText = transform.Find("HealthText").GetComponent<TextMeshPro>();
         }
         if(transform.Find("Sprite")){
             spriteRenderer = transform.Find("Sprite").GetComponent<SpriteRenderer>();
