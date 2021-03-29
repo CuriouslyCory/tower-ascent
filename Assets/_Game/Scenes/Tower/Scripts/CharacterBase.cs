@@ -20,6 +20,8 @@ public class CharacterBase: MonoBehaviour
 
     public Action onAttackAnimationComplete;
 
+    [SerializeField]
+
     protected virtual void Awake()
     {
         healthSystem = new HealthSystem();
@@ -35,10 +37,14 @@ public class CharacterBase: MonoBehaviour
     }
 
     
-    private void UpdateHealthText(object sender, EventArgs e)
+    private void UpdateHealthText(object sender, HealthChangeEventArgs e)
     {
         Debug.Log("Updating health text");
         this.healthText.text = healthSystem.health.ToString();
+
+        if(e.oldValue > e.newValue){
+            DamageText.Create(transform.position, e.oldValue - e.newValue);
+        }
     }
 
     public Vector3 GetPosition()

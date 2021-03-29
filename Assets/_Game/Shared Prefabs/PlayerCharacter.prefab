@@ -173,6 +173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameState: {fileID: 11400000, guid: 60a151b971c14dc418f8df31799a45bd, type: 2}
   playerCharacter: {fileID: 0}
+  mainCam: {fileID: 0}
 --- !u!114 &1724590382380387855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,10 +187,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dmgPotential: 0200000006000000
+  spriteRenderer: {fileID: 0}
+  animator: {fileID: 0}
+  healthText: {fileID: 0}
+  pfDamageText: {fileID: 2270605033191382805, guid: 67a75f10520a3654d93cde123e41c1cb, type: 3}
   gameState: {fileID: 11400000, guid: 60a151b971c14dc418f8df31799a45bd, type: 2}
   inventory: {fileID: 11400000, guid: 441fcff925d572048a33ac40f62cbc98, type: 2}
   onCastleFloor: 0
-  currentFloor: {fileID: 0}
 --- !u!70 &5011414758653576271
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -2,33 +2,34 @@ using System;
 
 public class HealthSystem 
 {
-    public EventHandler OnHealthChanged;
-    
+    private int armor;
     public int maxHealth;
     private int _health;
-
-    private int armor;
-    
     public int health
     {
         get { return _health; }
         set {
+            int oldVal = _health;
             if(value == _health)
                 return;
             _health = value;
-            OnHealthChanged?.Invoke(this, EventArgs.Empty);
+            OnHealthChanged?.Invoke(this, new HealthChangeEventArgs {oldValue = oldVal, newValue = value});
         }
     }
-
-    public HealthSystem(){}
+    public EventHandler<HealthChangeEventArgs> OnHealthChanged;
 
     public void Damage(int dmgAmt)
     {
         int dmg = dmgAmt - armor;
-        // don't heal from having too much armor
-        health -= dmg > 0 ? dmg : 0;
-        if(health < 0)
-            health = 0;
+        // can't do negative damage
+        dmg = dmg > 0 ? dmg : 0;
+
+        // can't have negative health
+        int newHealth = health - dmg;
+        if(newHealth < 0)
+            newHealth = 0;
+            
+        health = newHealth;
     }
 
     public void Heal(int healAmt)
@@ -45,3 +46,8 @@ public class HealthSystem
 
 }
 
+public class HealthChangeEventArgs: EventArgs
+{
+    public int oldValue;
+    public int newValue;
+}

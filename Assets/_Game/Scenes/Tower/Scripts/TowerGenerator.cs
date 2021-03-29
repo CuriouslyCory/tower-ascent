@@ -17,8 +17,17 @@ public class TowerGenerator : MonoBehaviour
         Vector3 position = new Vector3(-10,-2 + (floor * 4));
         GameObject newFloor = Instantiate(towerRoom_1, position, Quaternion.identity, grid);
         newFloor.GetComponent<TowerFloor>().floorNumber = floor + 1;
-        SpawnEnemy(NonPlayerCharacter.EnemyType.Enemy1, floor, new Vector3(newFloor.transform.position.x + 4, newFloor.transform.position.y), newFloor.transform);
+        SpawnEnemy(GetRandomEnemyType(), floor, new Vector3(newFloor.transform.position.x + 4, newFloor.transform.position.y), newFloor.transform);
         floors.Add(newFloor);
+    }
+
+    private NonPlayerCharacter.EnemyType GetRandomEnemyType()
+    {
+        Array values = Enum.GetValues(typeof(NonPlayerCharacter.EnemyType));
+        Debug.Log(values.GetValue(0));
+        Debug.Log(values.GetValue(1));
+        Debug.Log(values.GetValue(2));
+        return (NonPlayerCharacter.EnemyType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
     }
 
     private void SpawnEnemy(NonPlayerCharacter.EnemyType enemyType, int floor, Vector3 location, Transform parent)

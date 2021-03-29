@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6560398758817535710}
+  - component: {fileID: 2400792203100562455}
   - component: {fileID: 8100230338826746150}
   - component: {fileID: 1839968452406091273}
   - component: {fileID: 3064129277775429667}
@@ -19,7 +19,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6560398758817535710
+--- !u!4 &2400792203100562455
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,9 +97,11 @@ MonoBehaviour:
   dmgPotential: 
   spriteRenderer: {fileID: 0}
   animator: {fileID: 0}
-  healthText: {fileID: 0}
+  healthText: {fileID: 5524044966496628498}
+  pfDamageText: {fileID: 2270605033191382805, guid: 67a75f10520a3654d93cde123e41c1cb, type: 3}
   enemyType: 0
   loot: []
+  gold: 0
   enemyLevel: 0
 --- !u!1 &5924925493669341213
 GameObject:
@@ -130,7 +132,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children: []
-  m_Father: {fileID: 6560398758817535710}
+  m_Father: {fileID: 2400792203100562455}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7996426321944019438
@@ -233,7 +235,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 6560398758817535710}
+  m_Father: {fileID: 2400792203100562455}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}

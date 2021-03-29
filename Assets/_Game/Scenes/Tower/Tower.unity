@@ -1890,6 +1890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1203292557}
   - component: {fileID: 1203292556}
+  - component: {fileID: 1203292558}
   m_Layer: 0
   m_Name: GameAssets
   m_TagString: Untagged
@@ -1909,7 +1910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c7ec0db46e3fc744907d23a4eaca21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfNonPlayerCharacter: {fileID: 6560398758817535710, guid: 2c3dc93da28c6c743adc4c4727be6014, type: 3}
+  pfNonPlayerCharacter: {fileID: 2400792203100562455, guid: 2c3dc93da28c6c743adc4c4727be6014, type: 3}
   enemy1Sprite: {fileID: 21300008, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   enemy2Sprite: {fileID: 21300162, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   boss1Sprite: {fileID: 21300116, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
@@ -1927,6 +1928,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1203292558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203292555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f279b11b4314448ac4f5ba819c46b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pfDamageText: {fileID: 2270605033191382805, guid: 67a75f10520a3654d93cde123e41c1cb, type: 3}
 --- !u!1 &1288895733
 GameObject:
   m_ObjectHideFlags: 0
