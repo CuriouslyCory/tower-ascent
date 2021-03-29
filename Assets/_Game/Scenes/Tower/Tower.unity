@@ -1890,7 +1890,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1203292557}
   - component: {fileID: 1203292556}
-  - component: {fileID: 1203292558}
   m_Layer: 0
   m_Name: GameAssets
   m_TagString: Untagged
@@ -1928,19 +1927,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1203292558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1203292555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4f279b11b4314448ac4f5ba819c46b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pfDamageText: {fileID: 2270605033191382805, guid: 67a75f10520a3654d93cde123e41c1cb, type: 3}
 --- !u!1 &1288895733
 GameObject:
   m_ObjectHideFlags: 0
@@ -5692,7 +5678,7 @@ PrefabInstance:
     - target: {fileID: 8064747915434086845, guid: aa3aba24e3ec8c747b99fc26e289dd3c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
     - target: {fileID: 8064747915434086846, guid: aa3aba24e3ec8c747b99fc26e289dd3c, type: 3}
       propertyPath: m_Font
       value: 

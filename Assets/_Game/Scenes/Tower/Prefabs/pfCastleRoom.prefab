@@ -184,8 +184,8 @@ TilemapRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 97350607
-  m_SortingLayer: 3
+  m_SortingLayerID: 420293071
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -809,7 +809,7 @@ SortingGroup:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8804805375404406706}
-  m_Enabled: 1
+  m_Enabled: 0
   m_SortingLayerID: 312304819
   m_SortingLayer: 1
   m_SortingOrder: 0
@@ -825,3 +825,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86c7a34327102d4f9415b54f39b9456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorNumber: 0

@@ -17,7 +17,8 @@ public class TowerGenerator : MonoBehaviour
         Vector3 position = new Vector3(-10,-2 + (floor * 4));
         GameObject newFloor = Instantiate(towerRoom_1, position, Quaternion.identity, grid);
         newFloor.GetComponent<TowerFloor>().floorNumber = floor + 1;
-        SpawnEnemy(GetRandomEnemyType(), floor, new Vector3(newFloor.transform.position.x + 4, newFloor.transform.position.y), newFloor.transform);
+        //SpawnEnemy(GetRandomEnemyType(), floor, new Vector3(newFloor.transform.position.x + 4, newFloor.transform.position.y), newFloor.transform);
+        SpawnEnemy(GetRandomEnemyType(), newFloor);
         floors.Add(newFloor);
     }
 
@@ -30,13 +31,15 @@ public class TowerGenerator : MonoBehaviour
         return (NonPlayerCharacter.EnemyType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
     }
 
-    private void SpawnEnemy(NonPlayerCharacter.EnemyType enemyType, int floor, Vector3 location, Transform parent)
+    private void SpawnEnemy(NonPlayerCharacter.EnemyType enemyType, GameObject floor)
     {
-        Transform enemyObject = Instantiate(EnemyAssets.Instance.pfNonPlayerCharacter, location, Quaternion.identity, parent);
+        int floorNumber = floor.GetComponent<TowerFloor>().floorNumber;
+        Vector3 spawnLoc = new Vector3(floor.transform.position.x + 4, floor.transform.position.y - 0.65f);
+        Transform enemyObject = Instantiate(EnemyAssets.Instance.pfNonPlayerCharacter, spawnLoc, Quaternion.identity, floor.transform);
         NonPlayerCharacter enemy = enemyObject.GetComponent<NonPlayerCharacter>();
         
         // every 5 floors increase the level of the mobs
-        int enemyLevel = (int)Math.Ceiling(floor /  5.0f);
+        int enemyLevel = (int)Math.Ceiling(floorNumber /  5.0f);
         
         // minimum level of 1
         enemyLevel = enemyLevel < 1 ? 1 : enemyLevel;
