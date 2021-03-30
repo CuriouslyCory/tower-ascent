@@ -11,17 +11,27 @@ public class CharacterBase: MonoBehaviour
     public enum currentState {
         Idle
     }
-    public int[] dmgPotential;
 
-
+    [HideInInspector]
     public SpriteRenderer spriteRenderer;
+    
+    [HideInInspector]
     public Animator animator;
 
+    [HideInInspector]
     public TextMeshPro healthText;
 
     public Action onAttackAnimationComplete;
 
-    [SerializeField]
+    public Weapon equippedWeapon;
+
+    public Armor equippedArmor;
+
+    public int strength;
+    public int dexterity;
+    public int constitution;
+
+    
 
     protected virtual void Awake()
     {
@@ -80,9 +90,9 @@ public class CharacterBase: MonoBehaviour
 
     public int CalcDamage()
     {
-        int dmg = 0;
-        for(int i = 0; i < dmgPotential[0]; i++){
-            dmg += UnityEngine.Random.Range(1, dmgPotential[1]);
+        int dmg = strength;
+        for(int i = 0; i < equippedWeapon.numDice; i++){
+            dmg += UnityEngine.Random.Range(1, equippedWeapon.diceSides);
         }
         return dmg;
     }

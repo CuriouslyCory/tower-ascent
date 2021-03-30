@@ -37,8 +37,8 @@ public class GameState : ScriptableObject
         playerMaxHealth = 10;
 
         stats = new Dictionary<UpgradeableStat.StatType, UpgradeableStat> {
-            {UpgradeableStat.StatType.Sword, new UpgradeableStat {statType = UpgradeableStat.StatType.Sword, statLevel = 1, price = new int[] {50, 100, 200, 400, 600,1000,1500,2500,4000,6000}}},
-            {UpgradeableStat.StatType.Armor, new UpgradeableStat {statType = UpgradeableStat.StatType.Armor, statLevel = 1, price = new int[] {50, 100, 200, 400, 600,1000,1500,2500,4000,6000}}},
+            {UpgradeableStat.StatType.Strength, new UpgradeableStat {statType = UpgradeableStat.StatType.Strength, statLevel = 1, price = new int[] {50, 100, 200, 400, 600,1000,1500,2500,4000,6000}}},
+            {UpgradeableStat.StatType.Dexterity, new UpgradeableStat {statType = UpgradeableStat.StatType.Dexterity, statLevel = 1, price = new int[] {50, 100, 200, 400, 600,1000,1500,2500,4000,6000}}},
             {UpgradeableStat.StatType.Constitution, new UpgradeableStat {statType = UpgradeableStat.StatType.Constitution, statLevel = 1, price = new int[] {50, 100, 200, 400, 600,1000,1500,2500,4000,6000}}}
         };
     }

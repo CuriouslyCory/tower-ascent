@@ -71,6 +71,14 @@ PrefabInstance:
       propertyPath: enemyType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3064129277775429667, guid: 2c3dc93da28c6c743adc4c4727be6014, type: 3}
+      propertyPath: equippedArmor
+      value: 
+      objectReference: {fileID: 11400000, guid: 477810aeabbf840429a7f958ff200c2a, type: 2}
+    - target: {fileID: 3064129277775429667, guid: 2c3dc93da28c6c743adc4c4727be6014, type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 76852f218d6949041af1cd49b0161c0c, type: 2}
     - target: {fileID: 3786159784150469007, guid: 2c3dc93da28c6c743adc4c4727be6014, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4049

@@ -6,8 +6,8 @@ using UnityEngine;
 public class UpgradeableStat
 {
     public enum StatType {
-        Sword,
-        Armor,
+        Strength,
+        Dexterity,
         Constitution
     }
     public StatType statType;

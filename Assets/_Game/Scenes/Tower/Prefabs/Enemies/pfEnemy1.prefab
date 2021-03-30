@@ -63,6 +63,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3064129277775429667, guid: 2c3dc93da28c6c743adc4c4727be6014, type: 3}
+      propertyPath: equippedArmor
+      value: 
+      objectReference: {fileID: 11400000, guid: acf32cb28d28df04e8fc7b9752254106, type: 2}
+    - target: {fileID: 3064129277775429667, guid: 2c3dc93da28c6c743adc4c4727be6014, type: 3}
+      propertyPath: equippedWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 6cd47614307ec0948bbbf9a07718016b, type: 2}
     - target: {fileID: 3786159784150469007, guid: 2c3dc93da28c6c743adc4c4727be6014, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.771
