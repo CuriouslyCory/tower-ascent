@@ -33,13 +33,13 @@ public class GameState : ScriptableObject
 
     private void SetDefaultValues()
     {
-        inventory.gold = 10;
+        inventory.gold = 20000;
         playerMaxHealth = 10;
 
         stats = new Dictionary<UpgradeableStat.StatType, UpgradeableStat> {
-            {UpgradeableStat.StatType.Sword, new UpgradeableStat {statType = UpgradeableStat.StatType.Sword, statLevel = 1, price = new int[] {50, 100, 200, 400, 600}}},
-            {UpgradeableStat.StatType.Armor, new UpgradeableStat {statType = UpgradeableStat.StatType.Armor, statLevel = 1, price = new int[] {50, 100, 200, 400, 600}}},
-            {UpgradeableStat.StatType.Constitution, new UpgradeableStat {statType = UpgradeableStat.StatType.Constitution, statLevel = 1, price = new int[] {50, 100, 200, 400, 600}}}
+            {UpgradeableStat.StatType.Sword, new UpgradeableStat {statType = UpgradeableStat.StatType.Sword, statLevel = 1, price = new int[] {50, 100, 200, 400, 600,1000,1500,2500,4000,6000}}},
+            {UpgradeableStat.StatType.Armor, new UpgradeableStat {statType = UpgradeableStat.StatType.Armor, statLevel = 1, price = new int[] {50, 100, 200, 400, 600,1000,1500,2500,4000,6000}}},
+            {UpgradeableStat.StatType.Constitution, new UpgradeableStat {statType = UpgradeableStat.StatType.Constitution, statLevel = 1, price = new int[] {50, 100, 200, 400, 600,1000,1500,2500,4000,6000}}}
         };
     }
 

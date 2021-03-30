@@ -22,13 +22,22 @@ public class TowerGenerator : MonoBehaviour
         floors.Add(newFloor);
     }
 
+    private void GenerateBossFloor(int floor){
+        Vector3 position = new Vector3(-10,-2 + (floor * 4));
+        GameObject newFloor = Instantiate(towerRoom_1, position, Quaternion.identity, grid);
+        newFloor.GetComponent<TowerFloor>().floorNumber = floor + 1;
+        //SpawnEnemy(GetRandomEnemyType(), floor, new Vector3(newFloor.transform.position.x + 4, newFloor.transform.position.y), newFloor.transform);
+        SpawnEnemy(NonPlayerCharacter.EnemyType.Boss1, newFloor);
+        floors.Add(newFloor);
+    }
+
     private NonPlayerCharacter.EnemyType GetRandomEnemyType()
     {
         Array values = Enum.GetValues(typeof(NonPlayerCharacter.EnemyType));
         Debug.Log(values.GetValue(0));
         Debug.Log(values.GetValue(1));
         Debug.Log(values.GetValue(2));
-        return (NonPlayerCharacter.EnemyType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        return (NonPlayerCharacter.EnemyType)values.GetValue(UnityEngine.Random.Range(0, 2));
     }
 
     private void SpawnEnemy(NonPlayerCharacter.EnemyType enemyType, GameObject floor)
@@ -52,6 +61,7 @@ public class TowerGenerator : MonoBehaviour
         for(int i = 0; i < 100; i++){
             GenerateFloor(i);
         }
+        GenerateBossFloor(100);
     }
 
     // Update is called once per frame
