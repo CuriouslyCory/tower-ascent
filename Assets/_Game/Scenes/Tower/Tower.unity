@@ -5407,8 +5407,6 @@ MonoBehaviour:
   playerCharacter: {fileID: 38725429}
   gameOverPanel: {fileID: 1792696834}
   floorText: {fileID: 1419402034}
-  audioSource: {fileID: 2125449090}
-  volumeSlider: {fileID: 566482257}
 --- !u!4 &1720955891
 Transform:
   m_ObjectHideFlags: 0
@@ -5755,6 +5753,7 @@ MonoBehaviour:
   atk2: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
   oof1: {fileID: 0}
   oof2: {fileID: 0}
+  volumeSlider: {fileID: 566482257}
 --- !u!1001 &8064747915805126731
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5978,7 +5977,15 @@ PrefabInstance:
     - target: {fileID: 8505326908774768368, guid: d55ad3d399793594f9136b1b2ab3d2ec, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1720955890}
+      objectReference: {fileID: 2125449091}
+    - target: {fileID: 8505326908774768368, guid: d55ad3d399793594f9136b1b2ab3d2ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMuteClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8505326908774768368, guid: d55ad3d399793594f9136b1b2ab3d2ec, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Audio, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8505326909977907707, guid: d55ad3d399793594f9136b1b2ab3d2ec, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
