@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfDamageText: {fileID: 2270605033191382805, guid: 67a75f10520a3654d93cde123e41c1cb, type: 3}
+  pfEnemy1: {fileID: 5918994364511059861, guid: d7241fa7b5c79f04eacea78b8d5f9157, type: 3}
+  pfEnemy2: {fileID: 6601482591528975525, guid: d37f63664f007db469ea888d823c80f3, type: 3}
+  pfBoss1: {fileID: 8062420755761095683, guid: 44dc2a46432d9944abd907c6d3b7ac92, type: 3}

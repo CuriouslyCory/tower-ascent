@@ -28,12 +28,9 @@ public class NonPlayerCharacter : CharacterBase
         healthSystem.OnHealthChanged += OnHealthChanged;
     }
 
-    public void SetEnemyType(EnemyType type, int level)
+    public void SetEnemyLevel(int level)
     {
-        enemyType = type;
         enemyLevel = level;
-
-        spriteRenderer.sprite = GetSprite();
         spriteRenderer.flipX = true;
         healthSystem.maxHealth = level * 5 + (UnityEngine.Random.Range(1 , 5 * level) / 2);
         healthSystem.health = healthSystem.maxHealth;
@@ -50,15 +47,6 @@ public class NonPlayerCharacter : CharacterBase
         Destroy(gameObject);
     }
 
-    public Sprite GetSprite()
-    {
-        switch (enemyType) {
-            default:
-            case EnemyType.Enemy1:  return EnemyAssets.Instance.enemy1Sprite;
-            case EnemyType.Enemy2:  return EnemyAssets.Instance.enemy2Sprite;
-            case EnemyType.Boss1:   return EnemyAssets.Instance.boss1Sprite;
-        }
-    }
 
     private void AddRandomItems(int level){
 
@@ -72,6 +60,16 @@ public class NonPlayerCharacter : CharacterBase
                 animator.Play("Base Layer.Death");
             }
             playerState = PlayerStates.Dead;
+        }
+    }
+
+    public static Transform GetPF(EnemyType enemyType)
+    {
+        switch (enemyType) {
+            default:
+            case EnemyType.Enemy1:  return GameAssets.i.pfEnemy1;
+            case EnemyType.Enemy2:  return GameAssets.i.pfEnemy2;
+            case EnemyType.Boss1:   return GameAssets.i.pfBoss1;
         }
     }
 

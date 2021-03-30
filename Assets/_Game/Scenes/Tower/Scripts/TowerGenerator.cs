@@ -35,7 +35,7 @@ public class TowerGenerator : MonoBehaviour
     {
         int floorNumber = floor.GetComponent<TowerFloor>().floorNumber;
         Vector3 spawnLoc = new Vector3(floor.transform.position.x + 4, floor.transform.position.y - 0.65f);
-        Transform enemyObject = Instantiate(EnemyAssets.Instance.pfNonPlayerCharacter, spawnLoc, Quaternion.identity, floor.transform);
+        Transform enemyObject = Instantiate(NonPlayerCharacter.GetPF(enemyType), spawnLoc, Quaternion.identity, floor.transform);
         NonPlayerCharacter enemy = enemyObject.GetComponent<NonPlayerCharacter>();
         
         // every 5 floors increase the level of the mobs
@@ -43,7 +43,7 @@ public class TowerGenerator : MonoBehaviour
         
         // minimum level of 1
         enemyLevel = enemyLevel < 1 ? 1 : enemyLevel;
-        enemy.SetEnemyType(enemyType, enemyLevel);
+        enemy.SetEnemyLevel(enemyLevel);
     }
     
     // Start is called before the first frame update

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameAssets : MonoBehaviour
 {
@@ -17,4 +18,8 @@ public class GameAssets : MonoBehaviour
     }
 
     public Transform pfDamageText;
+
+    public Transform pfEnemy1;
+    public Transform pfEnemy2;
+    public Transform pfBoss1;
 }
