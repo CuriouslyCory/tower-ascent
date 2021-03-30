@@ -34,9 +34,11 @@ public class HealthSystem
 
     public void Heal(int healAmt)
     {
-        health += healAmt;
-        if(health > maxHealth)
-            health = maxHealth;
+        if(healAmt + healAmt > maxHealth){
+            health = maxHealth; 
+        }else{
+            health += healAmt;
+        }
     }
 
     public void SetArmor(int armor)

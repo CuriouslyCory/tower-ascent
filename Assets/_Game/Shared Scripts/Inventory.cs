@@ -3,11 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenu(fileName="Inventory", menuName="Inventory")]
+[Serializable]
 public class Inventory : ScriptableObject
 {
     public event EventHandler OnItemListChanged;
     public event EventHandler<StateEventArgs> OnGoldChanged;
+    
+    [SerializeField]
     private List<Item> itemList;
 
     [SerializeField]
@@ -33,7 +37,7 @@ public class Inventory : ScriptableObject
             bool itemAlreadyInInventory = false;
             foreach (Item inventoryItem in itemList){
                 if(inventoryItem.itemType == item.itemType){
-                    inventoryItem.amount += item.amount;
+                    inventoryItem.quantity += item.quantity;
                     itemAlreadyInInventory = true;
                 }
             }
@@ -55,20 +59,14 @@ public class Inventory : ScriptableObject
         }
         //Debug.Log("None found");
         // if we didn't find one go ahead and return an empty item of that type
-        return new Item{itemType = itemType, amount = 0}; 
+        return new Item{itemType = itemType, quantity = 0}; 
     }
 
     public bool ConsumeItem(Item.ItemType itemType){
-        Item usedItem = null;
-        foreach (Item inventoryItem in itemList){
-            if(inventoryItem.itemType == itemType){
-                usedItem = inventoryItem;
-                break;
-            }
-        }
+        Item usedItem = itemList.Find(item => item.itemType == itemType);
         if(usedItem != null){
-            usedItem.amount -= 1;
-            if(usedItem.amount < 1){
+            usedItem.quantity -= 1;
+            if(usedItem.quantity < 1){
                 itemList.Remove(usedItem);
             }
         }

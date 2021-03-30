@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c8c42d0c0399654d8cdab4079d6ea78, type: 3}
-  m_Name: RustySword
+  m_Script: {fileID: 11500000, guid: 9e8f8afb4f3e35b47965554e9bacad1f, type: 3}
+  m_Name: RustyArmor
   m_EditorClassIdentifier: 
-  weaponName: Rusty Sword
-  numDice: 1
-  diceSides: 4
+  itemName: Rusty Armor
+  itemType: 3
+  quantity: 0
+  price: 0
+  armorClass: 1

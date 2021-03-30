@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName="Weapon", menuName="Scripted Items/Weapon")]
-public class Weapon : ScriptableObject
+public class Weapon : Item
 {
-    public string weaponName;
     public int numDice;
     public int diceSides;
+    private void Awake() {
+        itemType = Item.ItemType.Weapon;
+    }
 }

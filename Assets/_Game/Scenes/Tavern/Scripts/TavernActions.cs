@@ -20,7 +20,11 @@ public class TavernActions : MonoBehaviour
     private GameObject pfUpgradeButton;
 
     [SerializeField]
-    private Transform menuContainer;
+    private GameObject buyItemContainer;
+    [SerializeField]
+    private GameObject sellItemContainer;
+    [SerializeField]
+    private GameObject upgradeStatsContainer;
 
     [SerializeField]
     private GameObject pfStatText;
@@ -70,7 +74,7 @@ public class TavernActions : MonoBehaviour
 
     private void CreateUpgradeButton(UpgradeableStat stat)
     {
-        buttonObjs.Add(Instantiate(pfUpgradeButton, menuContainer));
+        buttonObjs.Add(Instantiate(pfUpgradeButton, upgradeStatsContainer.transform));
         buttonObjs[buttonObjs.Count - 1].GetComponent<UpgradeButton>().SetStat(stat);
         
         buttonObjs[buttonObjs.Count - 1].GetComponent<Button_UI>().ClickFunc = () => {
@@ -86,11 +90,8 @@ public class TavernActions : MonoBehaviour
 
     public void OnUpgradeClick(UpgradeableStat stat)
     {
-        Debug.Log("Upgrade clicked: " + stat.statType);
         int statLevel = stat.statLevel;
-        Debug.Log("Stat current lvl: " + statLevel);
         int statCost = stat.price[statLevel - 1];
-        Debug.Log("Stat current cost: " + statCost);
         if(gameState.inventory.gold > statCost){
             stat.statLevel++;
             gameState.inventory.gold -= statCost;
@@ -116,8 +117,8 @@ public class TavernActions : MonoBehaviour
     private void UpdateInventoryUIComponents()
     {
         goldText.text = gameState.inventory.gold.ToString() + "G";
-        Item potions = gameState.inventory.GetItemByType(Item.ItemType.HealthPotion);
-        potionsText.text = "Potions: " + potions.amount.ToString();
+        Item potions = gameState.inventory.GetItemByType(Item.ItemType.HealingConsumable);
+        potionsText.text = "Potions: " + potions.quantity.ToString();
     }
 
     // Start is called before the first frame update
@@ -130,7 +131,28 @@ public class TavernActions : MonoBehaviour
     {
         if(gameState.inventory.gold >= 10){
             gameState.inventory.gold -= 10;
-            gameState.inventory.AddItem(new Item {itemType = Item.ItemType.HealthPotion, amount = 1});
+            gameState.inventory.AddItem(new Item {itemType = Item.ItemType.HealingConsumable, quantity = 1});
         }
+    }
+
+    public void OnClickBuyItemsButton()
+    {
+        sellItemContainer.SetActive(false);
+        upgradeStatsContainer.SetActive(false);
+        buyItemContainer.SetActive(true);
+    }
+
+    public void OnClickSellItemsButton()
+    {
+        sellItemContainer.SetActive(true);
+        upgradeStatsContainer.SetActive(false);
+        buyItemContainer.SetActive(false);
+    }
+
+    public void OnClickUpgradeStatsButton()
+    {
+        sellItemContainer.SetActive(false);
+        upgradeStatsContainer.SetActive(true);
+        buyItemContainer.SetActive(false);
     }
 } 

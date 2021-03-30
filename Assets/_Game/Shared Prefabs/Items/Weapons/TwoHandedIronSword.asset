@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8c42d0c0399654d8cdab4079d6ea78, type: 3}
   m_Name: TwoHandedIronSword
   m_EditorClassIdentifier: 
-  weaponName: Two Handed Iron Sword
+  itemName: Two Handed Iron Sword
+  itemType: 2
+  quantity: 0
+  price: 5000
   numDice: 20
   diceSides: 3

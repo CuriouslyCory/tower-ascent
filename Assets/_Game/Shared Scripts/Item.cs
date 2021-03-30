@@ -1,32 +1,32 @@
 using System;
+using UnityEngine;
 
 [Serializable]
-public class Item: IEquatable<Item>
+public class Item: ScriptableObject
 {
     public enum ItemType {
-        HealthPotion,
+        HealingConsumable,
         Treasure,
-        Weapon
+        Weapon,
+        Armor
     }
 
+    public string itemName;
+
     public ItemType itemType;
-    public int amount;
+    public int quantity;
+    public int price;
+
 
     public bool IsStackable()
     {
         switch (itemType){
             default:
-            case ItemType.HealthPotion:
+            case ItemType.HealingConsumable:
                 return true;
             case ItemType.Treasure:
                 return false;
         }
-    }
-
-    public bool Equals(Item other)
-    {
-        if (other == null) return false;
-        return (this.itemType.Equals(other.itemType));
     }
 
 }
