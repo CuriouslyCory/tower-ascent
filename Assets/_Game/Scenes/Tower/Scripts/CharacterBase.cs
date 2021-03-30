@@ -35,16 +35,23 @@ public class CharacterBase: MonoBehaviour
         }
 
         healthSystem.OnHealthChanged += UpdateHealthText;
+        healthSystem.OnHealthChanged += PlayDamageSound;
     }
 
     
     private void UpdateHealthText(object sender, HealthChangeEventArgs e)
     {
-        Debug.Log("Updating health text");
         this.healthText.text = healthSystem.health.ToString();
 
         if(e.oldValue > e.newValue){
             DamageText.Create(transform.position, e.oldValue - e.newValue);
+        }
+    }
+
+    private void PlayDamageSound(object sender, HealthChangeEventArgs e)
+    {
+        if(e.oldValue > e.newValue){
+            FindObjectOfType<AudioManager>().Play("attack");
         }
     }
 
