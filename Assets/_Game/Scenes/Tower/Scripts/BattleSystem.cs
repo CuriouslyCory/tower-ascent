@@ -109,7 +109,7 @@ public class BattleSystem
     private void LootEnemy()
     {
         for(int i = 0; i < towerGuard.loot.Count; i++){
-            playerCharacter.inventory.AddItem(towerGuard.loot[i]);
+            playerCharacter.inventory.AddItem(towerGuard.loot[i], 1);
         }
         playerCharacter.inventory.gold += towerGuard.gold;
     }

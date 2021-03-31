@@ -16,5 +16,6 @@ MonoBehaviour:
   itemType: 2
   quantity: 0
   price: 5000
+  sprite: {fileID: 21300072, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   numDice: 20
   diceSides: 3

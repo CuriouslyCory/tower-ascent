@@ -9,5 +9,6 @@ public class Armor : Item
 
     private void Awake() {
         itemType = Item.ItemType.Armor;
+        isEquippable = true;
     }
 }

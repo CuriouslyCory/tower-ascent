@@ -51,6 +51,9 @@ public class PlayerCharacter : CharacterBase
             gameState.Initialize();
         }
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        equippedWeapon = gameState.inventory.GetEquippedWeapon();
+        equippedArmor = gameState.inventory.GetEquippedArmor();
         healthSystem.maxHealth = gameState.playerMaxHealth;
         healthSystem.health = healthSystem.maxHealth;
         healthSystem.SetArmor(equippedArmor.armorClass);
@@ -58,6 +61,7 @@ public class PlayerCharacter : CharacterBase
         strength = gameState.stats[UpgradeableStat.StatType.Strength].statLevel;
         dexterity = gameState.stats[UpgradeableStat.StatType.Dexterity].statLevel;
         constitution = gameState.stats[UpgradeableStat.StatType.Constitution].statLevel;
+        
 
         healthSystem.OnHealthChanged += OnHealthChanged;
     }

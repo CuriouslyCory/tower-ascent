@@ -18,8 +18,11 @@ public class GameAssets : MonoBehaviour
     }
 
     public Transform pfDamageText;
+    public Transform pfErrorTMessage;
 
     public Transform pfEnemy1;
     public Transform pfEnemy2;
     public Transform pfBoss1;
+
+    public GameState gameState;
 }

@@ -9,5 +9,6 @@ public class HealingConsumable : Item
 
     private void Awake() {
         itemType = Item.ItemType.HealingConsumable;
+        isConsumable = true;
     }
 }

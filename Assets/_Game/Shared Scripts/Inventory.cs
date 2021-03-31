@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName="Inventory", menuName="Inventory")]
+[CreateAssetMenu(fileName="New Inventory", menuName="Inventory System")]
 [Serializable]
 public class Inventory : ScriptableObject
 {
@@ -12,7 +12,7 @@ public class Inventory : ScriptableObject
     public event EventHandler<StateEventArgs> OnGoldChanged;
     
     [SerializeField]
-    private List<Item> itemList;
+    public List<InventorySlot> inventorySlots = new List<InventorySlot>();
 
     [SerializeField]
     private int _gold;
@@ -28,49 +28,97 @@ public class Inventory : ScriptableObject
     }
 
     public Inventory() {
-        itemList = new List<Item>();
+        // itemList = new List<Item>();
     }
 
-    public void AddItem(Item item)
+    public void AddItem(Item item, int quantity)
     {
         if(item.IsStackable()){
-            bool itemAlreadyInInventory = false;
-            foreach (Item inventoryItem in itemList){
-                if(inventoryItem.itemType == item.itemType){
-                    inventoryItem.quantity += item.quantity;
-                    itemAlreadyInInventory = true;
-                }
-            }
-            if(!itemAlreadyInInventory){
-                itemList.Add(item);
+            InventorySlot inventorySlot = inventorySlots.Find(inventorySlot => inventorySlot.item.itemName == item.itemName);
+            if(inventorySlot != null){
+                inventorySlot.quantity += quantity;
+            }else{
+                inventorySlots.Add(new InventorySlot(item, quantity));
             }
         }else{
-            itemList.Add(item);
+            inventorySlots.Add(new InventorySlot(item, quantity));
         }
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public Item GetItemByType(Item.ItemType itemType)
     {
-        foreach (Item inventoryItem in itemList){
-            if(inventoryItem.itemType == itemType){
-                return inventoryItem;
+        foreach (InventorySlot inventorySlot in inventorySlots){
+            if(inventorySlot.item.itemType == itemType){
+                return inventorySlot.item;
             }
         }
         //Debug.Log("None found");
         // if we didn't find one go ahead and return an empty item of that type
-        return new Item{itemType = itemType, quantity = 0}; 
+        return null; 
     }
 
     public bool ConsumeItem(Item.ItemType itemType){
-        Item usedItem = itemList.Find(item => item.itemType == itemType);
-        if(usedItem != null){
-            usedItem.quantity -= 1;
-            if(usedItem.quantity < 1){
-                itemList.Remove(usedItem);
+        InventorySlot inventorySlot = inventorySlots.Find(inventorySlot => inventorySlot.item.itemType == itemType);
+        if(inventorySlot != null){
+            inventorySlot.quantity -= 1;
+            if(inventorySlot.quantity < 1){
+                inventorySlots.Remove(inventorySlot);
             }
+            OnItemListChanged?.Invoke(this, EventArgs.Empty);
         }
-        OnItemListChanged?.Invoke(this, EventArgs.Empty);
-        return usedItem != null;
+        return inventorySlot != null;
     }
+
+    public bool SellItem(InventorySlot inventorySlot){
+        gold += inventorySlot.item.price / 3;
+        if(inventorySlot != null){
+            inventorySlot.quantity -= 1;
+            if(inventorySlot.quantity < 1){
+                inventorySlots.Remove(inventorySlot);
+            }
+            OnItemListChanged?.Invoke(this, EventArgs.Empty);
+        }
+        return inventorySlot != null;
+    }
+
+    public void EquipItem(InventorySlot inventorySlot)
+    {
+        if(!inventorySlot.item.isEquippable)
+            return;
+
+        List<InventorySlot> itemsOfType = inventorySlots.FindAll(_inventorySlot => _inventorySlot.item.itemType == inventorySlot.item.itemType && _inventorySlot.isEquipped);
+        foreach(InventorySlot itemOfType in itemsOfType){
+            itemOfType.isEquipped = false;
+        }
+        inventorySlot.isEquipped = true;
+        OnItemListChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public Weapon GetEquippedWeapon(){
+        return inventorySlots.Find(inventorySlot => inventorySlot.item.itemType == Item.ItemType.Weapon && inventorySlot.isEquipped).item as Weapon;
+    }
+
+    public Armor GetEquippedArmor(){
+        return inventorySlots.Find(inventorySlot => inventorySlot.item.itemType == Item.ItemType.Armor && inventorySlot.isEquipped).item as Armor;
+    }
+}
+
+[Serializable]
+public class InventorySlot
+{
+    public Item item;
+    public int quantity;
+
+    public bool isEquipped;
+
+    public InventorySlot(Item _item, int _quantity){
+        item = _item;
+        quantity = _quantity;
+    }
+
+    public void AddQuantity(int value){
+        quantity += value;
+    }
+
 }

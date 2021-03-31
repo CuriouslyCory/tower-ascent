@@ -8,13 +8,10 @@ using TMPro;
 
 public class TavernActions : MonoBehaviour
 {
-    [SerializeField]
     private GameState gameState;
 
     [SerializeField]
     private TextMeshProUGUI goldText;
-    [SerializeField]
-    private TextMeshProUGUI potionsText;
     
     [SerializeField]
     private GameObject pfUpgradeButton;
@@ -37,6 +34,12 @@ public class TavernActions : MonoBehaviour
 
     private List<GameObject> buttonObjs;
     private List<GameObject> statTexts;
+
+    [SerializeField]
+    private GameObject inventoryContainer;
+
+    [SerializeField]
+    private GameObject characterStatsContainer;
     
 
 
@@ -44,6 +47,7 @@ public class TavernActions : MonoBehaviour
     {
         buttonObjs = new List<GameObject>();
         statTexts = new List<GameObject>();
+        gameState = GameAssets.i.gameState;
 
         if(gameState.stats == null || gameState.stats.Count == 0){
             gameState.Initialize();
@@ -117,22 +121,13 @@ public class TavernActions : MonoBehaviour
     private void UpdateInventoryUIComponents()
     {
         goldText.text = gameState.inventory.gold.ToString() + "G";
-        Item potions = gameState.inventory.GetItemByType(Item.ItemType.HealingConsumable);
-        potionsText.text = "Potions: " + potions.quantity.ToString();
+
     }
 
     // Start is called before the first frame update
     public void OnClickSmashTower()
     {
         SceneManager.LoadScene("Tower", LoadSceneMode.Single);
-    }
-
-    public void OnClickBuyPotion()
-    {
-        if(gameState.inventory.gold >= 10){
-            gameState.inventory.gold -= 10;
-            gameState.inventory.AddItem(new Item {itemType = Item.ItemType.HealingConsumable, quantity = 1});
-        }
     }
 
     public void OnClickBuyItemsButton()
@@ -154,5 +149,17 @@ public class TavernActions : MonoBehaviour
         sellItemContainer.SetActive(false);
         upgradeStatsContainer.SetActive(true);
         buyItemContainer.SetActive(false);
+    }
+
+    public void OnClickStatsButton()
+    {
+        characterStatsContainer.SetActive(true);
+        inventoryContainer.SetActive(false);
+    }
+
+    public void OnClickInventoryButton()
+    {
+        characterStatsContainer.SetActive(false);
+        inventoryContainer.SetActive(true);
     }
 } 

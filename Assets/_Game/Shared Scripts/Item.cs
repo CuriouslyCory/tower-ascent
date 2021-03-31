@@ -17,6 +17,11 @@ public class Item: ScriptableObject
     public int quantity;
     public int price;
 
+    public Sprite sprite;
+
+    public Boolean isEquippable = false;
+    public Boolean isConsumable = false;
+
 
     public bool IsStackable()
     {
@@ -24,7 +29,8 @@ public class Item: ScriptableObject
             default:
             case ItemType.HealingConsumable:
                 return true;
-            case ItemType.Treasure:
+            case ItemType.Armor:
+            case ItemType.Weapon:
                 return false;
         }
     }

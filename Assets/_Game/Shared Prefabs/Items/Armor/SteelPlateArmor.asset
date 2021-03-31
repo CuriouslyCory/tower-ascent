@@ -15,5 +15,6 @@ MonoBehaviour:
   itemName: Steel Plate Armor
   itemType: 3
   quantity: 0
-  price: 0
+  price: 7000
+  sprite: {fileID: 21300058, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   armorClass: 20

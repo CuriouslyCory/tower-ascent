@@ -9,6 +9,10 @@ public class GameState : ScriptableObject
 {
     
     public bool isInitialized = false;
+    [SerializeField]
+    private Weapon defaultWeapon;
+    [SerializeField]
+    private Armor defaultArmor;
     
     public Inventory inventory;
     
@@ -35,6 +39,12 @@ public class GameState : ScriptableObject
     {
         inventory.gold = 20000;
         playerMaxHealth = 10;
+        if(inventory.inventorySlots.Count == 0){
+            inventory.AddItem(defaultArmor, 1);
+            inventory.EquipItem(inventory.inventorySlots[0]);
+            inventory.AddItem(defaultWeapon, 1);
+            inventory.EquipItem(inventory.inventorySlots[1]);
+        }
 
         stats = new Dictionary<UpgradeableStat.StatType, UpgradeableStat> {
             {UpgradeableStat.StatType.Strength, new UpgradeableStat {statType = UpgradeableStat.StatType.Strength, statLevel = 1, price = new int[] {50, 100, 200, 400, 600,1000,1500,2500,4000,6000}}},

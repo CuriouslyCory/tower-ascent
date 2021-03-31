@@ -9,5 +9,6 @@ public class Weapon : Item
     public int diceSides;
     private void Awake() {
         itemType = Item.ItemType.Weapon;
+        isEquippable = true;
     }
 }

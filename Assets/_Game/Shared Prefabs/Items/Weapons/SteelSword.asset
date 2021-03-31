@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c8c42d0c0399654d8cdab4079d6ea78, type: 3}
   m_Name: SteelSword
   m_EditorClassIdentifier: 
-  itemName: 
+  itemName: Steel Sword
   itemType: 2
   quantity: 0
   price: 5000
+  sprite: {fileID: 21300088, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   numDice: 12
   diceSides: 4

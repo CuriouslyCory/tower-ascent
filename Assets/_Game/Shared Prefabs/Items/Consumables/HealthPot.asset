@@ -16,4 +16,5 @@ MonoBehaviour:
   itemType: 0
   quantity: 0
   price: 10
+  sprite: {fileID: 21300134, guid: f5f1c19ce87450f4b97f8b363746558d, type: 3}
   healingAmount: 10
