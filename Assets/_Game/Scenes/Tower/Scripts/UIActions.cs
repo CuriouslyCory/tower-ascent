@@ -50,7 +50,7 @@ public class UIActions : MonoBehaviour
     private void UpdateUIComponents()
     {
         goldText.text = gameState.inventory.gold.ToString() + "G";
-        potionsText.text = gameState.inventory.GetItemByType(Item.ItemType.HealingConsumable).quantity.ToString();
+        potionsText.text = gameState.inventory.GetInventorySlotByType(Item.ItemType.HealingConsumable).quantity.ToString();
         UpdatePotionCount();
     }
 
@@ -89,7 +89,7 @@ public class UIActions : MonoBehaviour
 
     private void UpdatePotionCount()
     {
-        Item potions = gameState.inventory.GetItemByType(Item.ItemType.HealingConsumable);
+        InventorySlot potions = gameState.inventory.GetInventorySlotByType(Item.ItemType.HealingConsumable);
         potionsText.text = "Potions: " + potions.quantity.ToString();
         usePotButton.enabled = potions.quantity > 0 ? true : false;
     }
@@ -106,9 +106,11 @@ public class UIActions : MonoBehaviour
 
     private void UsePotion()
     {
+        InventorySlot potionSlot = gameState.inventory.GetInventorySlotByType(Item.ItemType.HealingConsumable);
+        HealingConsumable potion = potionSlot.item as HealingConsumable;
         bool usedItem = gameState.inventory.ConsumeItem(Item.ItemType.HealingConsumable);
         if(usedItem){
-            playerCharacter.healthSystem.Heal(10);
+            playerCharacter.healthSystem.Heal(potion.healingAmount);
         }
     }
 

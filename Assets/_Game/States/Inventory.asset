@@ -12,11 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 959fc1cac06da4348b0d41b83170ffb3, type: 3}
   m_Name: Inventory
   m_EditorClassIdentifier: 
-  inventorySlots:
-  - item: {fileID: 11400000, guid: b8b947da41932ee4685d2183fd4fb1dc, type: 2}
-    quantity: 1
-    isEquipped: 1
-  - item: {fileID: 11400000, guid: 0889033fe9f26d74a991f6526d6dc0ac, type: 2}
-    quantity: 1
-    isEquipped: 1
-  _gold: 20000
+  inventorySlots: []
+  _gold: 10

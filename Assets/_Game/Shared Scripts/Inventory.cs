@@ -46,16 +46,9 @@ public class Inventory : ScriptableObject
         OnItemListChanged?.Invoke(this, EventArgs.Empty);
     }
 
-    public Item GetItemByType(Item.ItemType itemType)
+    public InventorySlot GetInventorySlotByType(Item.ItemType itemType)
     {
-        foreach (InventorySlot inventorySlot in inventorySlots){
-            if(inventorySlot.item.itemType == itemType){
-                return inventorySlot.item;
-            }
-        }
-        //Debug.Log("None found");
-        // if we didn't find one go ahead and return an empty item of that type
-        return null; 
+        return inventorySlots.Find(inventorySlot => inventorySlot.item.itemType == itemType);
     }
 
     public bool ConsumeItem(Item.ItemType itemType){

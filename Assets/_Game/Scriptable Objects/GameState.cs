@@ -37,7 +37,7 @@ public class GameState : ScriptableObject
 
     private void SetDefaultValues()
     {
-        inventory.gold = 20000;
+        inventory.gold = 10;
         playerMaxHealth = 10;
         if(inventory.inventorySlots.Count == 0){
             inventory.AddItem(defaultArmor, 1);
